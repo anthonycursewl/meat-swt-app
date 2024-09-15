@@ -1,0 +1,116 @@
+.control-access-cn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.control-access {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 94%;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (max-width: 700px) {
+    .control-access {
+        width: 100%;
+        padding: .5rem;
+    }
+}
+
+.control-access-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background: #ffe7e7;
+    padding: .6rem 1rem;
+    border-radius: 1rem;
+}
+
+.control-access-title img {
+    width: 25px;
+    height: auto;
+}
+
+.control-access-sessions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 1200px) {
+    .control-access-sessions {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .control-access-sessions {
+        grid-template-columns: 1fr;
+    }
+}
+
+.c-e-session {
+    background: rgb(241, 240, 240);
+    padding: 1.2rem;
+    border-radius: 1rem;
+    display: grid;
+    align-items: flex-start;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.c-id {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: .5rem;
+    background: #dddddd;
+    padding: .2rem .5rem;
+    border-radius: .5rem;
+    gap: .5rem;
+}
+
+.c-id img {
+    width: 20px;
+    height: auto;
+}
+
+.c-info-all {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+}
+
+#letters-id {
+    font-family: monospace, sans-serif;
+    letter-spacing: 2px;
+    color: rgb(153, 56, 153);
+}
+
+.c-delete-s img {
+    width: 20px;
+    height: auto;
+}
+
+.c-delete-s {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    gap: .5rem;
+    color: rgb(146, 18, 18);
+    background: rgba(255, 153, 153, 0.801);
+    padding: .4rem;
+    border-radius: 1rem;
+}

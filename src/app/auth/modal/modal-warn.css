@@ -1,0 +1,52 @@
+.warn_modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: .2s ease-in-out;
+}
+
+.warn_modal_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #faf7f7;
+    border-radius: 1rem;
+    gap: .2rem;
+    padding: 1rem;
+    flex-direction: column;
+    width: 500px;
+}
+
+
+.warn_modal_active {
+    opacity: 1;
+    pointer-events: all;
+    transition: .2s ease-in-out;
+}
+
+.warn_logo img {
+    width: 100px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #ffa9a9);
+}
+
+.wanr_close_x img {
+    width: 30px;
+    height: auto;
+}
+
+.wanr_close_x {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    cursor: pointer;
+}

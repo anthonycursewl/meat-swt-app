@@ -1,0 +1,68 @@
+.navbar-logo img {
+    width: 120px;
+    height: auto;
+}
+
+.navbar-dash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(209, 198, 198, 0.87);
+}
+
+.navbar-dash-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 92%;
+    padding: 1rem 0;
+}
+
+.click-profile img {
+    width: 20px;
+    height: auto;
+}
+
+.click-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background: rgb(216, 216, 216);
+    padding: .2rem .8rem;
+    border-radius: .8rem;
+    transition: .2s ease-in-out;
+}
+
+.click-profile:hover {
+    transition: .2s ease-in-out;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.nav-profile img {
+    width: 40px;
+    height: auto;
+    filter: drop-shadow(0px 4px 4px #f7f4f4);
+    transition: .2s ease-in-out;
+}
+
+.nav-profile img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    filter: drop-shadow(0px 4px 4px #ffc0c0)
+}
+
+.nav-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
