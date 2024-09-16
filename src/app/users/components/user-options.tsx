@@ -76,7 +76,7 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Pr
                         }
                     </div>
 
-                    <li onClick={() => navigate(`/dashboard/users/edit/${id}`)}>
+                    <li onClick={() => navigate(`/dashboard/users/change-password/${id}`)}>
                         <img src="/icons/icon-edit-role.svg" alt="Icon Editar Role" />
                         <p>Cambiar contraseña</p>
                     </li>

@@ -10,6 +10,7 @@ import CreateRole from "./app/roles/create-role";
 import EditRole from "./app/roles/edit-role";
 import Users from "./app/users/users";
 import CreateUser from "./app/users/create-user";
+import ChangeUserPassword from "./app/users/change-user-password";
 
 function App() {
   return (
@@ -78,6 +79,15 @@ function App() {
             element={
               <ProtectedRoutes>
                 <CreateUser />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/users/change-password/:id"
+            element={
+              <ProtectedRoutes>
+                <ChangeUserPassword />
               </ProtectedRoutes>
             }
           />

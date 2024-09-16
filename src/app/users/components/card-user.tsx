@@ -23,7 +23,7 @@ export default function CardUser({ id, username, permissions }: IUsers) {
       </div>
 
       <div className="al-roles-card">
-        <p className="al-role-name">Rol</p>
+        <p className="al-role-name">Permisos</p>
         <p>{permissions?.slice(0,1).map((p: any) => p.permisos)}</p> 
       </div>
 
