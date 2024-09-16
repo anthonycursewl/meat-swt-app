@@ -21,7 +21,7 @@
     border-radius: 1rem;
     flex-direction: column;
     box-shadow: 0 0 10px #bbbbbb8f;
-    width: 300px;
+    min-width: 250px;
 }
 
 .options_modal_active {
@@ -95,4 +95,8 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
+}
+
+.options-perms p {
+    width: 90%;
 }

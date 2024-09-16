@@ -31,3 +31,30 @@ time, mark, audio, video {
 * {
     box-sizing: border-box;
 }
+
+/* Estilos generales */
+html {
+  scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
+/* Estilos para la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra */
+}
+
+/* Estilos para el track (fondo de la barra) */
+::-webkit-scrollbar-track {
+  background: #e4e3e3; /* Color de fondo claro */
+  border-radius: 10px;
+}
+
+/* Estilos para el thumb (parte que se desplaza) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color oscuro */
+  border-radius: 10px;
+}
+
+/* Estilos para el thumb al pasar el ratón */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color más oscuro al pasar el ratón */
+}

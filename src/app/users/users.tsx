@@ -1,19 +1,20 @@
-import "./roles.css"
 import NavbarDash from "../dashboard/navbar/navbar-dash"
 import { useEffect, useState } from "react"
 import { secureFetch } from "../shared/secureFetch"
 import { API_URL } from "../../config/config.brd"
-import { IRoles } from "./interfaces/intRoles"
+import { IRoles } from "../roles/interfaces/intRoles"
 import { useGlobalState } from "../store/useGlobalState"
 import { Link } from "react-router-dom"
-import CardRole from "./components/card-role"
 
 // Componente para mostrar la ruta actual
 import ShowCurrentPath from "../components/ShowCurrentPath"
+import CardUser from "./components/card-user"
+import { IUsers } from "./interfaces/AllInterfaces"
 
-export default function Roles() {
-    const [roles, setRoles] = useState([])
+export default function Users() {
+    const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(false)
+    const [error, setErrorMessage] = useState('')
 
     // Estado del modal 
     const [active, setActive] = useState(false)
@@ -24,14 +25,14 @@ export default function Roles() {
 
     const { signalReload }: any = useGlobalState()
 
-    const getAllRoles = async () => {
+    const getAllUsers = async () => {
         setLoading(true)
-        const response = await secureFetch(`${API_URL}roles/getallroles`, 'GET', null)
+        const response = await secureFetch(`${API_URL}accounts/getallaccounts`, 'GET', null)
 
         if (response?.state.ok) {
             const data = await response.state.json()
-            console.log(`DATA AQUI ROLES ${data}`)
-            setRoles(data)
+            setUsers(data)
+            console.log(data)
             setLoading(false)
         } else {
             const error = await response?.state.status
@@ -41,9 +42,8 @@ export default function Roles() {
     }
 
     useEffect(() => {
-        getAllRoles()
+        getAllUsers()
     }, [signalReload])
-    
 
     return (
         <>
@@ -53,24 +53,24 @@ export default function Roles() {
 
             <div className="al-roles-content">
                 
-                <ShowCurrentPath path="Dashboard &gt; Roles"/>
+                <ShowCurrentPath path="Dashboard &gt; Usuarios"/>
 
                 <div className="al-roles-table">
                     <div className="roles-table-30">
 
-                        <Link to="/dashboard/roles/create">
+                        <Link to="/dashboard/users/create">
                             <div className="al-roles-ktitle">
                                 <img src="/icons/icon-create-role.svg" alt="" />
-                                <p>Crear Rol</p>
+                                <p>Crear Usuario</p>
                             </div>
                         </Link>
                     </div>
 
                     <div className="roles-table-70">
                         {loading ? <p>Cargando...</p> :
-                            roles.map((role: IRoles) => {
+                            users.map((u: IUsers) => {
                                 return (
-                                    <CardRole setActive={setActive} active={active} handleOpenModal={handleOpenMdodal} id={role.id} nombre={role.nombre} permisos={role.permisos} key={role.id}/>
+                                    <CardUser id={u.id} username={u.username} permissions={u.permissions} key={u.id} configuracion={u.configuracion} />
                                 )
                             })
                         }

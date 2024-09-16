@@ -15,6 +15,12 @@
     gap: 2rem;
 }
 
+@media (max-width: 700px) {
+    .container-main-cn {
+        width: 100%;
+    }
+}
+
 .al-roles-form {
     width: 100%;
     display: grid;
@@ -61,7 +67,7 @@
 
 .al-roles-il input, select {
     width: 50%;
-    padding: 1rem;
+    padding: .6rem;
     border-radius: 1rem;
     border: 1px solid #ccc;
     background: #f1ebeb;

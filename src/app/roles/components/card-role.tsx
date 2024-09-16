@@ -18,10 +18,10 @@ export default function CardRole({ id, nombre, permisos }: IRoles) {
 
       <div className="al-roles-card">
         <p className="al-role-name">Permisos</p>
-        <p>{permisos}</p>
+        <p id="role-perms">{permisos}</p>
       </div>
 
-      <ModalOptinsRoles active={open} id={id} permisos={permisos} setActive={setOpen}/>
+      <ModalOptinsRoles active={open} id={id} permisos={permisos} setActive={setOpen} nombre={nombre}/>
     </div>
   );
 }

@@ -5,20 +5,46 @@ import { secureFetch } from "../shared/secureFetch"
 import { API_URL } from "../../config/config.brd"
 import { useEffect, useState, useRef } from "react"
 import { ModalWarn } from "../auth/modal/modal-warn"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
-export default function CreateRole() {
+export default function EditRole() {
   const [permissions, setPermissions] = useState([])
   const [selectedPermissions, setSelectedPermissions] = useState([])
   const [addedPermissions, setAddedPermissions] = useState<any>([]);
-
+  const [nombreRol, setNombreRol] = useState('')
+ 
   const [active, setActive] = useState(false)
   const[error, setError] = useState('')
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate()
+  const { id } = useParams();
 
   const formRef = useRef<any>();
 
+  const getAllRoles = async () => {
+    const state = await secureFetch(`${API_URL}roles/getallroles`, 'GET', null)
+
+    if (!state?.state.ok) {
+      console.log(state?.state.error)
+    } else {
+      const data = await state.state.json()
+
+      data?.map((role: any) => {
+        if (role.id === id) {
+          setAddedPermissions(role.permisos)
+          setNombreRol(role.nombre)
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    getAllRoles()
+  }, [])
+
+
+  
   const verifyPermissions = (e: any) => {
     const newSelectedPermission = e.target.value;
     
@@ -27,17 +53,19 @@ export default function CreateRole() {
 
   const getAllPermissionsTypes = async () => {
     const state = await secureFetch(`${API_URL}roles/getallpermissionstypes`, 'GET', null)
-
+    
     if (!state?.state.ok) {
-      console.log(state?.state.error)
+        console.log(state?.state.error)
+        setActive(true)
+        setError(state?.state.error)
     } else {
-      const data = await state.state.json()
+        const data = await state.state.json()
       setPermissions(data)
     }
   }
 
   const handleAddPermission = (e: any) => {
-    e.preventDefault()
+      e.preventDefault()
     if (selectedPermissions.length === 0) {
       return
     }
@@ -45,72 +73,66 @@ export default function CreateRole() {
     if (addedPermissions.includes(selectedPermissions)) {
       return
     }
-
+    
     setAddedPermissions([...addedPermissions, selectedPermissions]);
-  }
-
-  const handleRemovePermission = (permissionToRemove: string) => {
-    const updatedPermissions = addedPermissions.filter((permission: string) => permission !== permissionToRemove);
-    setAddedPermissions(updatedPermissions);
-  }
-
-  useEffect(() => {
-    getAllPermissionsTypes()
-  }, [])
-
-  const handleCreateRole = async (e: any) => {
-    e.preventDefault()
-    const { name } = formRef.current.elements;
-
-    const body = {
-      nombre: name.value.trim(),
-      permisos: addedPermissions
-    }
-
-    if (body.nombre === '') {
-      setActive(true)
-      setError('Error | Debes agregar un nombre.')
-      return
-    }
-
-    if (addedPermissions.length === 0) {
-      setActive(true)
-      setError('Error | Debes agregar    al menos un permiso.')
-      return
-    }
-
-    const id_perm = crypto.randomUUID()
-    const stateRes = await secureFetch(`${API_URL}roles/createnewpermission/${id_perm}`, 'PUT', body)
-
-    if (!stateRes?.state.ok) {
-      console.log(stateRes?.state.error)
-      setError(stateRes?.state.error)
-      setActive(true)
-    } else {
-      setActive(false)
-      navigate('/dashboard/roles')
-      const data = await stateRes.state.text()
-      console.log(data)
-    }
 }
 
-  return (
-    <>
+  const handleRemovePermission = (permissionToRemove: string) => {
+      const updatedPermissions = addedPermissions.filter((permission: string) => permission !== permissionToRemove);
+      setAddedPermissions(updatedPermissions);
+  }
+  
+  useEffect(() => {
+      getAllPermissionsTypes()
+    }, [])
+
+    const updateRole = async (e: any) => {
+      e.preventDefault()
+      if (addedPermissions.length === 0) {
+        return
+      }
+
+      if (nombreRol === '') {
+        return
+      }
+
+      setLoading(true)
+      const state = await secureFetch(`${API_URL}roles/editrole/${id}`, 'PUT', {
+          nombre: nombreRol.trim(),
+          permisos: addedPermissions
+      })
+      
+      setLoading(false)
+      if (!state?.state.ok) {
+        setError(state?.state.error)
+        setActive(true)
+      } else {
+        setError(`¡Rol ${nombreRol} actualizado con éxito!`)
+        setActive(true)
+
+        setTimeout(() => {
+          navigate('/dashboard/roles')
+        }, 2000)
+      }
+      
+    }
+    
+    return (
+        <>
       <NavbarDash />
 
       <ContainerMain>
-        <ShowCurrentPath path="Dashboard &gt; Roles &gt; Create"/>
+        <ShowCurrentPath path="Dashboard &gt; Roles &gt; Edición"/>
 
-        <h1>Create Role</h1>
         
         <div className="c-roles">
 
-          <form className="al-roles-form" ref={formRef} onSubmit={handleCreateRole}>
+          <form className="al-roles-form" ref={formRef} onSubmit={updateRole}>
             
             <div className="roles-perms-and-name">
               <div className="al-roles-il">
                 <label>Nombre de Rol</label>
-                <input type="text" name="name" id="name" />
+                <input type="text" name="name" id="name" value={nombreRol} onChange={(e) => setNombreRol(e.target.value)}/>
               </div>
 
               <div className="al-roles-il">
@@ -148,12 +170,14 @@ export default function CreateRole() {
             </div>
 
             <div className="al-button-roles">
-              <button onClick={handleAddPermission}>
+                {loading !== true ?    
+                <button onClick={handleAddPermission}>
                 <img src="/icons/click-profile.svg" alt="Crear Rol" />
                 Agregar Permiso
               </button>
+                : null}
               
-              <button type="submit">Crear Rol</button>
+              {loading ? <div className="loader"></div> : <button type="submit">Actualiza Rol</button>}
             </div>
 
           </form>

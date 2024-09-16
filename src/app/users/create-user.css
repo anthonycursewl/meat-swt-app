@@ -1,0 +1,109 @@
+.user-inputs {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.user-inputs input {
+    width: 90%;
+    padding: .6rem;
+    border-radius: 1rem;
+    border: 1px solid #ccc;
+    background: #f1ebeb;
+    color: unset;
+    outline: none;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.user-group {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 60%;
+}
+
+.user-group h1 {
+    font-size: 1.2rem;
+    font-weight: 500;  
+}
+
+.form-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.user-button-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.user-button-group button {
+    padding: .5rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background: #ceccd3;
+    border: none;
+    transition: .2s ease-in-out;
+}
+
+.user-button-group button:hover {
+    background: #d3d2d2;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+    color: rgb(29, 29, 29);
+}
+
+.user-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: .7rem;
+    background: linear-gradient(
+        90deg,
+        rgba(199, 199, 199, 0.342) 0%,
+        rgba(208, 208, 255, 0.192) 35%);
+    padding: .8rem;
+    border-radius: 1rem;
+    color: #383737;
+}
+
+.user-title a {
+    color: unset;
+}
+
+.user-title img {
+    width: 25px;
+    height: auto;
+}
+
+.user-title-img img {
+    width: 25px;
+    height: auto;
+}
+
+.user-title-img {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .5rem;
+    background: #eeeded;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    width: 90%;
+}

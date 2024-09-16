@@ -23,8 +23,7 @@ export default function NavbarDash() {
         <nav className='navbar-dash'>
 
             <div className='navbar-dash-content'>
-                <div className='navbar-logo'>
-                    
+                <div className='navbar-logo'>    
                     <img src="/mark/duran-logo-r.webp" alt="Duran Logo" />
                 </div>
 
@@ -34,16 +33,20 @@ export default function NavbarDash() {
                         <img src="/icons/click-profile.svg" alt="Icono para abrir el perfil" />
                     </div>
 
+                    <div className='click-profile' onClick={() => navigate('/dashboard/users')}>
+                        <p>Usuarios</p>
+                        <img src="/icons/click-profile.svg" alt="Icono para abrir el apartado de Usuarios" />
+                    </div>
+
                     <div className='click-profile' onClick={handleLogout}>
                         <p>Logout</p>
                         <img src="/icons/click-profile.svg" alt="Icono para abrir el perfil" />
                     </div>
 
+                </div>
                     <div className='nav-profile' onClick={handleCloseProfile}>
                         <img src="/icons/icon-profile.svg" alt="Icono del Perfil" />
                     </div>
-
-                </div>
             </div>
 
             <ModalProfile active={active} setActive={setActive} />

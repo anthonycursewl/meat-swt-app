@@ -7,6 +7,9 @@ import ControlAcess from "./app/acess/control-acess";
 import PasswordRecovery from "./app/recovery/password-recovery";
 import Roles from "./app/roles/roles";
 import CreateRole from "./app/roles/create-role";
+import EditRole from "./app/roles/edit-role";
+import Users from "./app/users/users";
+import CreateUser from "./app/users/create-user";
 
 function App() {
   return (
@@ -48,6 +51,33 @@ function App() {
             element={
               <ProtectedRoutes>
                 <CreateRole />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/roles/edit/:id"
+            element={
+              <ProtectedRoutes>
+                <EditRole />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/users"
+            element={
+              <ProtectedRoutes>
+                <Users />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/users/create"
+            element={
+              <ProtectedRoutes>
+                <CreateUser />
               </ProtectedRoutes>
             }
           />

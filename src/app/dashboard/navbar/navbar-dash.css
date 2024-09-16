@@ -3,6 +3,13 @@
     height: auto;
 }
 
+@media (max-width: 500px) {
+    .navbar-logo img {
+        width: 90px;
+        height: auto;
+    }
+}
+
 .navbar-dash {
     display: flex;
     align-items: center;
@@ -46,6 +53,12 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+}
+
+@media (max-width: 550px) {
+    .navbar-links {
+        display: none;
+    }
 }
 
 .nav-profile img {

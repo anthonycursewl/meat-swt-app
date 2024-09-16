@@ -1,4 +1,4 @@
-import './roles-options.css'
+import './user-options.css'
 import { useNavigate } from 'react-router-dom';
 import { ModalWarn } from '../../auth/modal/modal-warn';
 import { useState } from 'react';
@@ -14,7 +14,7 @@ interface Props {
     nombre: string;
 }
 
-export const ModalOptinsRoles = ({ active, id, permisos, setActive, nombre }: Props) =>  {
+export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Props) =>  {
 
     const { signalReload, setSignalReload }: any = useGlobalState()
 
@@ -36,7 +36,7 @@ export const ModalOptinsRoles = ({ active, id, permisos, setActive, nombre }: Pr
 
     const handleDeleteRole = async () => {
         setLoading(true)
-        const state = await secureFetch(`${API_URL}roles/deleterole/${id}`, 'DELETE', null)
+        const state = await secureFetch(`${API_URL}accounts/deleteaccount/${id}`, 'DELETE', null)
 
         if (state?.state.ok) {
             setActiveDelete(false)
@@ -57,12 +57,10 @@ export const ModalOptinsRoles = ({ active, id, permisos, setActive, nombre }: Pr
             
             <div className='options_modal_content'>
                 <div className='options_close_x'>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'}}>
-                        <img src="/icons/icon-show-role.svg" alt="Logo Close" />
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px'}}>
+                        <img src="/icons/icon-username.svg" alt="Logo Close" />
                         <p>{nombre}</p>
                     </div>
-                    
-                    <p id='letters-id'>{id?.split('-')[0]}</p>
                 </div>
                 
                 <ul className='options-list-links'>
@@ -71,16 +69,16 @@ export const ModalOptinsRoles = ({ active, id, permisos, setActive, nombre }: Pr
                             permisos?.map((permission: any) => {
                                 return (
                                     <>
-                                        <p key={permission}>{permission}</p>
+                                        <p key={permission}>{permission.permisos}</p>
                                     </>
                                 )
                             })
                         }
                     </div>
 
-                    <li onClick={() => navigate(`/dashboard/roles/edit/${id}`)}>
+                    <li onClick={() => navigate(`/dashboard/users/edit/${id}`)}>
                         <img src="/icons/icon-edit-role.svg" alt="Icon Editar Role" />
-                        <p>Editar</p>
+                        <p>Cambiar contraseña</p>
                     </li>
                     <li onClick={() => processDelete()}>
                         <img src="/icons/icon-delete-role.svg" alt="Icon Eliminar Role" />
@@ -90,7 +88,7 @@ export const ModalOptinsRoles = ({ active, id, permisos, setActive, nombre }: Pr
             </div>
         </div>
         
-        <ModalWarn active={activeDelete} setActive={setActiveDelete} error={`¿Estás seguro que quieres borrar este rol? ID ${id}`} dynamicFunction={handleDeleteRole} loading={laoding} zIndex={2}/>
+        <ModalWarn active={activeDelete} setActive={setActiveDelete} error={`¿Estás seguro que quieres borrar este Usuario?`} dynamicFunction={handleDeleteRole} loading={laoding} zIndex={2}/>
     </>
     )
 }
