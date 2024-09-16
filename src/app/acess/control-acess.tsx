@@ -1,9 +1,10 @@
-import { getCookie } from "../auth/services/getCookie"
 import NavbarDash from "../dashboard/navbar/navbar-dash"
 import './control-acess.css'
 import { useEffect, useState } from "react"
-import { getAllSessions } from "./services/get-all-sessions"
 import CardSessions from "./components/card-sessions"
+import { secureFetch } from "../shared/secureFetch"
+import { API_URL } from "../../config/config.brd"
+import ShowCurrentPath from "../components/ShowCurrentPath"
 
 export default function ControlAcess() {
     const [loading, setLoading] = useState(false);
@@ -11,12 +12,14 @@ export default function ControlAcess() {
     const [signalDelete, setSignalDelete] = useState(1);
 
     const getSessions = async () => {
-        const token = getCookie('AuthToken')
-        if (!token) return 
+        setLoading(true)
+        const session = await secureFetch(`${API_URL}session/getlogins`, 'GET', null)
 
-        await getAllSessions(token, setLoading, setSessions);
-        console.log("arrozito y se obtuvieron de nuevo las sesiones")
-        console.log(sessions)
+        if (session) { 
+            const data = await session.state.json();
+            setSessions(data)
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -29,10 +32,8 @@ export default function ControlAcess() {
 
             <div className="control-access-cn">
                 <div className="control-access">
-                    <div className="control-access-title">
-                        <img src="/icons/icon-access.svg" alt="" />
-                        <p>Dashboard &gt; Control de Accesos</p>
-                    </div>
+
+                    <ShowCurrentPath path="Dashboard &gt; Control Access"/>
 
                     <div className="control-access-sessions">
                         {

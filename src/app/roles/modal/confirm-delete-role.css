@@ -1,0 +1,128 @@
+.session_modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.562);
+    opacity: 0;
+    pointer-events: none;
+    transition: .2s ease-in-out;
+}
+
+.session_modal_content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.session_modal_active {
+    opacity: 1;
+    pointer-events: all;
+    transition: .2s ease-in-out;
+}
+
+.session_modal_close {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.session_modal_close img:nth-child(1) {
+    width: 25px;
+    height: auto;
+    cursor: pointer;
+}
+
+.session_modal_close img:nth-child(2) {
+    width: 70px;
+    height: auto;
+}
+
+.session_modal_text {
+    text-align: center;
+}
+
+
+.session_modal_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4rem .8rem;
+    gap: .5rem;
+    color: rgb(146, 18, 18);
+    background: rgba(255, 153, 153, 0.801);
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    transition: .2s ease-in-out;
+}
+
+.session_modal_button:hover {
+    background: rgba(255, 127, 127, 0.801);
+    transition: .2s ease-in-out;
+}
+
+.session_modal_button_loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: not-allowed;
+    pointer-events: none;
+    gap: .5rem;
+    color: rgb(146, 18, 18);
+    background: rgba(255, 153, 153, 0.801);
+    padding: .4rem 1rem;
+    border-radius: 1rem;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    transition: .2s ease-in-out;
+}
+
+.session_modal_button_loading img {
+    width: 20px;
+    height: auto;
+}
+
+.session_modal_button img {
+    width: 20px;
+    height: auto;
+}
+
+.loader {
+    width: 10px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 4px solid #fccaca00;
+    border-right-color: #b4130a97;
+    position: relative;
+    animation: l24 1s infinite linear;
+  }
+  .loader:before,
+  .loader:after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: inherit;
+    animation: inherit;
+    animation-duration: 2s;
+  }
+  .loader:after {
+    animation-duration: 4s;
+  }
+  @keyframes l24 {
+    100% {transform: rotate(1turn)}
+  }

@@ -4,7 +4,7 @@
 
   color-scheme: light dark;
   color: rgba(71, 71, 71, 0.87);
-  background: linear-gradient(to right, rgb(255, 246, 246), white, rgb(245, 231, 231), white);
+  background: linear-gradient(to right, rgb(255, 246, 246), white, rgb(250, 243, 243), white);
   min-height: 100vh;
 }
 

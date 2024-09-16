@@ -5,6 +5,8 @@ import Dashboard from "./app/dashboard/dashboard";
 import ProtectedRoutes from "./app/ProtectedRoutes/ProtectedRoutes";
 import ControlAcess from "./app/acess/control-acess";
 import PasswordRecovery from "./app/recovery/password-recovery";
+import Roles from "./app/roles/roles";
+import CreateRole from "./app/roles/create-role";
 
 function App() {
   return (
@@ -28,6 +30,24 @@ function App() {
             element={
               <ProtectedRoutes>
                 <ControlAcess />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/roles"
+            element={
+              <ProtectedRoutes>
+                <Roles />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/roles/create"
+            element={
+              <ProtectedRoutes>
+                <CreateRole />
               </ProtectedRoutes>
             }
           />

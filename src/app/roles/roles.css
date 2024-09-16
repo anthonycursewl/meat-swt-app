@@ -1,0 +1,150 @@
+.al-roles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.al-roles-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 98%;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.al-roles-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background: #ffe7e7;
+    padding: .6rem .8rem;
+    border-radius: 1rem;
+}
+
+.al-roles-title img {
+    width: 30px;
+    height: auto;
+}
+
+.al-roles-table {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.roles-table-30 {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.roles-table-30 a {
+    text-decoration: none;
+    width: 100%;
+    color: unset;
+    transition: .1s ease-in-out;
+}
+
+.roles-table-30 a:hover {
+    transition: .1s ease-in-out;
+    color: #c54c4cec;
+}
+
+.roles-table-70 {
+    width: 80%;
+    display: grid;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 1800px) {
+    .roles-table-70 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 1300px) {
+    .roles-table-70 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.al-roles-ktitle {
+    background: #e7e2e2;
+    width: 95%;
+    padding: .5rem 2rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    transition: .2s ease-in-out;
+}
+
+.al-roles-ktitle:hover {
+    background: #fce8e8;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+}
+
+.al-roles-ktitle img {
+    width: 20px;
+    height: auto;
+    margin-bottom: 2px;
+}
+
+.al-roles-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(70deg, rgb(216, 216, 216), rgb(218, 218, 218), rgb(223, 217, 217));
+    padding: .8rem;
+    border-radius: 1rem;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.al-role-name {
+    background: #ccc8c8;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.al-roles-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.al-roles-card p {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: 'Poppins', sans-serif
+}
+
+.al-roles-card p:nth-child(2) {
+    margin-left: 10px;
+}
+
+.al-actions-roles img {
+    width: 25px;
+    height: auto;
+}
+

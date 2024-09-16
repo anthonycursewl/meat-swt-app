@@ -29,6 +29,11 @@ export default function NavbarDash() {
                 </div>
 
                 <div className='navbar-links'>
+                    <div className='click-profile' onClick={() => navigate('/dashboard/roles')}>
+                        <p>Roles</p>
+                        <img src="/icons/click-profile.svg" alt="Icono para abrir el perfil" />
+                    </div>
+
                     <div className='click-profile' onClick={handleLogout}>
                         <p>Logout</p>
                         <img src="/icons/click-profile.svg" alt="Icono para abrir el perfil" />

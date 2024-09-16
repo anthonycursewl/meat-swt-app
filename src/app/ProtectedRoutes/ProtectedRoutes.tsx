@@ -12,9 +12,6 @@ export default function ProtectedRoutes({ children }: any) {
 
     const verifyUser = async () => {
         const AuthToken = getCookie('AuthToken')
-        if (AuthToken === null) {
-            window.location.reload()
-        }
 
         if (AuthToken !== null) {
             const state = await thrVerifyUser(AuthToken, setLoading, setIsAuth);
@@ -54,8 +51,6 @@ export default function ProtectedRoutes({ children }: any) {
             }
         }
     }
-
-
 
     useEffect(() => {
         verifyUser()

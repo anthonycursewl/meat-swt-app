@@ -1,5 +1,5 @@
 import { secureFetch } from '../../shared/secureFetch';
-import './confirm-delete-modal.css'
+import './confirm-delete-role.css'
 import { useState } from 'react';
 import { API_URL } from '../../../config/config.brd';
 
@@ -9,7 +9,7 @@ interface ConfirmDeleteModalProps {
     setSingalDelete: (value: number) => void;
 }
 
-export const ConfirmDeleteModal = ({ id, signalDelete, setSingalDelete }: ConfirmDeleteModalProps) => {
+export const ConfirmDeleteRole = ({ id, signalDelete, setSingalDelete }: ConfirmDeleteModalProps) => {
     const [isActive, setIsActive] = useState(false);
     const [loading, setLoading] = useState(false);
 

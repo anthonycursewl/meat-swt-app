@@ -1,8 +1,8 @@
-import { API_URL } from "../../../config/config.brd"
-import { crearCookie } from "../../auth/services/setCookie"
+import { API_URL } from "../../config/config.brd"
+import { crearCookie } from "../auth/services/setCookie"
 
-export const thrVerifyUserRefresh = async (RefreshToken: string, setLoading: (value: any) => void, setIsAuth: (value: any) => void) => {
-    setLoading(true)
+export const refreshUser = async (RefreshToken: string) => {
+    
     try {
         const res = await fetch(`${API_URL}auth/refresh`, {
             method: 'GET',
@@ -18,15 +18,10 @@ export const thrVerifyUserRefresh = async (RefreshToken: string, setLoading: (va
         console.log(`VERIFICACIÓN TOKEN REFRESH: ${res.status}`)
 
         const data = await res.json()
-        console.log(data)
         const { token, duracionToken } = data
         const expiresTN = duracionToken * 1000
         crearCookie('AuthToken', token, expiresTN)
-        setIsAuth(true)
-        setLoading(false)
     } catch (error: any) {
-        setIsAuth(false)
-        setLoading(false)
-        return { error: error.message }
-    }
+        return { error: error.message }
+    }
 }
