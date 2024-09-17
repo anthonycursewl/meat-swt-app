@@ -13,7 +13,6 @@ export default function CardUser({ id, username, permissions, userIsProtected }:
   return (
     <div className="al-roles-group" onClick={() => openModal()}>
       <div className="al-roles-card">
-        <p className="al-role-name">Correo Electrónico</p>
         <p id="email-user">{username}</p>
       </div>
 

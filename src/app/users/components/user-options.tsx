@@ -103,7 +103,7 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre, user
                     {
                         userIsProtected ?
                         <li onClick={() => handleUnprotectUser()}>
-                            <img src="/icons/icon-protect-user.svg" alt="Icon Editar Role" />
+                            <img src="/icons/icon-unlock-user.svg" alt="Icon Editar Role" />
                             <p>Desproteger Usuario</p>
                         </li>
                         : 

@@ -52,11 +52,10 @@ export default function SetRole() {
 
             userFiltered?.map((perm: any) => {
                 perm.permissions?.map((p: any) => {
-                    setCurrentRoles((prev: any) => [...prev, p.id])
+                    console.log(p)
+                    setCurrentRoles([...currentRoles, p.id, p.nombre])
                 })
             })
-
-            console.log(currentRoles)
             
             setLoading(false)
         } else {
@@ -172,8 +171,25 @@ export default function SetRole() {
                 ))}
                 
                 <div>
+                    <h1>@ Roles Actuales</h1>
+                </div>
+
+                <div className="al-roles-d">
+                    {
+                    loadingRoles ? <div>Cargando...</div> :
+                    currentRoles?.map((role: any) => (
+                        <div key={role.id} className={`al-roles-card-d ${selectedRole === role.id ? 'selected' : ''}`} onClick={() => selectRoleByCard(role.id)}>
+                            <img src="/icons/icon-roles.svg" alt="Icono de los Roles" />
+                            <p>{role.nombre}</p>
+                        </div>
+                    ))
+                    }
+                </div>
+
+                <div>
                     <h1>@ Roles disponibles</h1>
                 </div>
+                
                 <div className="al-roles-d">
                     {
                     loadingRoles ? <div>Cargando...</div> :
