@@ -58,3 +58,11 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* Color más oscuro al pasar el ratón */
 }
+
+/* COLORS DE LOS USERS GLOBAL */
+
+.user-colors-global {
+  color: #e66e6e;
+}
+
+/* COLORS DE LOS USERS GLOBAL */

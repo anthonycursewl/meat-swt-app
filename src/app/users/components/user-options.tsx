@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { secureFetch } from '../../shared/secureFetch';
 import { API_URL } from '../../../config/config.brd';
 import { useGlobalState } from '../../store/useGlobalState';
+import ModalProtectUser from './modal-protect-user';
 
 interface Props {
     active: boolean;
@@ -16,7 +17,7 @@ interface Props {
 
 export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Props) =>  {
 
-    const { signalReload, setSignalReload }: any = useGlobalState()
+    const { signalReload, setSignalReload, setSignalModalFront, signalModalFront }: any = useGlobalState()
 
     const [activeDelete, setActiveDelete] = useState(false)
     const [laoding, setLoading] = useState(false)
@@ -26,6 +27,9 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Pr
             setActive(false)
         }
     }
+
+    // Estados para abrir el modal para protección de usuario
+    const [activeProtect, setActiveProtect] = useState(false)
 
     // Objeto para navegar entre rutas
     const navigate = useNavigate()
@@ -49,11 +53,21 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Pr
             setLoading(false)
             handleClose()
         }
-    } 
+    }
+
+    const handleOpenModalProtectUser = () => {
+        setActiveProtect(true)
+        setActive(false)
+        setSignalModalFront(false)
+    }
 
     return (
         <>
-            <div className={`options_modal ${active ? 'options_modal_active' : ''}`}>
+            <div className={`options_modal ${active ? (
+                signalModalFront ? 'options_modal_active' :
+                '' 
+                )   
+                : ''}`}>
             
             <div className='options_modal_content'>
                 <div className='options_close_x'>
@@ -75,7 +89,19 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Pr
                             })
                         }
                     </div>
-
+                    {
+                        permisos?.map((permission: any) => {
+                            if (permission.is) {
+                                return (
+                                    <p>{permission.permisos}</p>
+                                )
+                            }
+                        })
+                    }
+                    <li onClick={() => navigate(`/dashboard/users/set-role/${id}`)}>
+                        <img src="/icons/icon-roles-g.svg" alt="Icon Editar Role" />
+                        <p>Roles</p>
+                    </li>
                     <li onClick={() => navigate(`/dashboard/users/change-password/${id}`)}>
                         <img src="/icons/icon-edit-role.svg" alt="Icon Editar Role" />
                         <p>Cambiar contraseña</p>
@@ -87,7 +113,8 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Pr
                 </ul>
             </div>
         </div>
-        
+         
+        <ModalProtectUser activeProtect={activeProtect} setActiveProtect={setActiveProtect} id={id as string} />
         <ModalWarn active={activeDelete} setActive={setActiveDelete} error={`¿Estás seguro que quieres borrar este Usuario?`} dynamicFunction={handleDeleteRole} loading={laoding} zIndex={2}/>
     </>
     )

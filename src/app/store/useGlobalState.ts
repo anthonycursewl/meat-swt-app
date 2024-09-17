@@ -7,4 +7,6 @@ export const useGlobalState = create((set) => ({
     setCurrentAuthToken: (CurrentAuthToken: any) => set({ CurrentAuthToken }),
     signalReload: 0,
     setSignalReload: (v: number) => set({ signalReload: v }),
+    signalModalFront: true,
+    setSignalModalFront: (v: boolean) => set({ signalModalFront: v })
 }));

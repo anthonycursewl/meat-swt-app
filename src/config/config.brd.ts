@@ -1,1 +1,1 @@
-export const API_URL = 'https://buscadorapi.adminbaselang.com/'
+export const API_URL = 'https://uniapi.ordereffortless.com/'

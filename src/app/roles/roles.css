@@ -135,7 +135,7 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(70deg, rgb(216, 216, 216), rgb(218, 218, 218), rgb(223, 217, 217));
+    background: linear-gradient(70deg, #ffe7e7, #ffe7e7, #ffe7e7);
     padding: .8rem;
     border-radius: 1rem;
     gap: 1rem;
@@ -143,7 +143,7 @@
 }
 
 .al-role-name {
-    background: #ccc8c8;
+    background: #ffd2d2;
     padding: .5rem;
     border-radius: .5rem;
     width: 100%;

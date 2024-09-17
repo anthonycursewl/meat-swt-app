@@ -11,6 +11,7 @@ import EditRole from "./app/roles/edit-role";
 import Users from "./app/users/users";
 import CreateUser from "./app/users/create-user";
 import ChangeUserPassword from "./app/users/change-user-password";
+import SetRole from "./app/roles/set-role";
 
 function App() {
   return (
@@ -88,6 +89,15 @@ function App() {
             element={
               <ProtectedRoutes>
                 <ChangeUserPassword />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/users/set-role/:id"
+            element={
+              <ProtectedRoutes>
+                <SetRole />
               </ProtectedRoutes>
             }
           />

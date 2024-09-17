@@ -1,0 +1,83 @@
+.al-roles-d {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: 100%;
+    gap: 1rem;
+}
+
+.al-roles-card-d {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffe7e7;
+    padding: .5rem;
+    border-radius: 1rem;
+    gap: .5rem;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.al-roles-card-d:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8cfcf;
+    padding: .5rem;
+    border-radius: 1rem;
+    gap: .5rem;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.al-roles-card-d img {
+    width: 25px;
+    height: auto;
+}
+
+.selected {
+    background: #f8cfcf;
+}
+
+.btn-set-role {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.btn-set-role button {
+    padding: .5rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background: #aeacb3;
+    border: none;
+    transition: .2s ease-in-out;
+}
+
+.btn-set-role button {
+    padding: .5rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background: #f8cfcf;
+    border: none;
+    transition: .2s ease-in-out;
+    color: rgb(119, 119, 119);
+}
+
+.btn-set-role button:hover {
+    background: #f8bebe;
+    transition: .2s ease-in-out;
+    color: rgb(19, 18, 18);
+    cursor: pointer;
+}
