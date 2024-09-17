@@ -9,12 +9,13 @@ import "./set-role.css";
 
 export default function SetRole() {
   // Recuperar el id del param
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState({});
+  const [allRoles, setAllRoles] = useState([]);
+  
+  
+  const [loadingUser, setLoadingUser] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // Recuperar los roles en generl
-  const [allRoles, setAllRoles] = useState<any>();
-  const [loadingRoles, setLoadingRoles] = useState<any>(false);
+  const [loadingRoles, setLoadingRoles] = useState(false);
 
   const { id } = useParams();
 
@@ -54,6 +55,7 @@ export default function SetRole() {
   };
 
   useEffect(() => {
+
     getAllUsers();
     getAllRoles();
   }, []);
@@ -65,6 +67,8 @@ export default function SetRole() {
   }, [allRoles, user]);
 
   const asignarRole = async (active: string) => {
+    const newUserPermissions = [...user.permissions, allRoles.find((role: any) => role.id === active)];
+    setUser({ ...user, permissions: newUserPermissions });
     const stateSetRole = await secureFetch(
       `${API_URL}roles/setroletouser`,
       "POST",
@@ -76,13 +80,19 @@ export default function SetRole() {
 
     if (stateSetRole?.state.ok) {
       console.log("Rol asignado");
-      getAllUsers();
     } else {
+      getAllUsers();
+
       console.log("Error | No se pudo asignar el rol");
     }
   };
 
   const eliminarRol = async (active: string) => {
+
+    
+    const newUserPermissions = user.permissions.filter(role => role.id !== active);
+    setUser({ ...user, permissions: newUserPermissions });
+
     const stateDeleteRole = await secureFetch(
       `${API_URL}roles/deleteroletouser`,
       "DELETE",
@@ -94,10 +104,12 @@ export default function SetRole() {
 
     if (stateDeleteRole?.state.ok) {
       console.log("Rol removido");
-      getAllUsers();
     } else {
+      getAllUsers();
+
       console.log("Error | No se pudo remover el rol. Intenta de nuevo!");
     }
+
   };
 
   return (
@@ -123,7 +135,7 @@ export default function SetRole() {
           </div>
 
           <div className="al-roles-d">
-            {loading ? (
+            {loadingUser ? (
               <div>Cargando...</div>
             ) : (
               <>
@@ -145,7 +157,7 @@ export default function SetRole() {
             <h1>@ Roles totales</h1>
           </div>
           <div className="al-roles-d">
-            {loading ? (
+            {loadingRoles ? (
               <div>Cargando...</div>
             ) : (
               <>
@@ -162,6 +174,6 @@ export default function SetRole() {
           </div>
         </ContainerMain>
       )}
-    </>
-  );
+    </>
+  );
 }
