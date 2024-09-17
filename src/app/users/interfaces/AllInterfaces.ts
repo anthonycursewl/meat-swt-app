@@ -3,4 +3,5 @@ export interface IUsers {
     configuracion: any;
     permissions: Array<string> | any;
     username: string;
+    userIsProtected: boolean
 }

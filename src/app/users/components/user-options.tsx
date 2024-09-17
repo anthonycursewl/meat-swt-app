@@ -13,9 +13,10 @@ interface Props {
     permisos: any;
     setActive: (active: boolean) => void;
     nombre: string;
+    userIsProtected: boolean
 }
 
-export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Props) =>  {
+export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre, userIsProtected }: Props) =>  {
 
     const { signalReload, setSignalReload, setSignalModalFront, signalModalFront }: any = useGlobalState()
 
@@ -61,6 +62,15 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Pr
         setSignalModalFront(false)
     }
 
+    const handleUnprotectUser = async () => {
+        const stateRemove = await secureFetch(`${API_URL}accounts/removeuserprotection/${id}`, 'PUT', null)
+        if (stateRemove?.state.ok) {
+            setSignalReload(signalReload + 1)
+        } else {
+            setActive(false)
+        }
+    }
+
     return (
         <>
             <div className={`options_modal ${active ? (
@@ -80,24 +90,29 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre }: Pr
                 <ul className='options-list-links'>
                     <div className='options-perms'>
                         {
-                            permisos?.map((permission: any) => {
+                            permisos?.map((permission: any, index: number) => {
                                 return (
                                     <>
-                                        <p key={permission}>{permission.permisos}</p>
+                                        <p key={index}>{permission.permisos}</p>
                                     </>
                                 )
                             })
                         }
                     </div>
+
                     {
-                        permisos?.map((permission: any) => {
-                            if (permission.is) {
-                                return (
-                                    <p>{permission.permisos}</p>
-                                )
-                            }
-                        })
+                        userIsProtected ?
+                        <li onClick={() => handleUnprotectUser()}>
+                            <img src="/icons/icon-protect-user.svg" alt="Icon Editar Role" />
+                            <p>Desproteger Usuario</p>
+                        </li>
+                        : 
+                        <li onClick={() => handleOpenModalProtectUser()}>
+                            <img src="/icons/icon-protect-user.svg" alt="Icon Editar Role" />
+                            <p>Proteger Usuario</p>
+                        </li>
                     }
+
                     <li onClick={() => navigate(`/dashboard/users/set-role/${id}`)}>
                         <img src="/icons/icon-roles-g.svg" alt="Icon Editar Role" />
                         <p>Roles</p>

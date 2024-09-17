@@ -3,7 +3,7 @@ import { ModalOptinsUsers } from "./user-options";
 import { useState } from "react";
 import { IUsers } from "../interfaces/AllInterfaces";
 
-export default function CardUser({ id, username, permissions }: IUsers) {
+export default function CardUser({ id, username, permissions, userIsProtected }: IUsers) {
   const [open, setOpen] = useState(false);
 
   const openModal = () => {
@@ -33,13 +33,11 @@ export default function CardUser({ id, username, permissions }: IUsers) {
       </div>
 
       <div className="al-roles-card">
-        <p className="al-role-name">Rol Protegido</p> 
-        {
-          permissions?.length === 0 ? <p>N/A</p> : <p>{permissions?.map((item: any) => item.id.split('-')[0] )}</p>
-        }
+        <p className="al-role-name">Usuario Protegido</p> 
+        {userIsProtected ? <p>Protegido</p> : <p>Sin Proteger</p>}
       </div>
 
-      <ModalOptinsUsers active={open} id={id} permisos={permissions} setActive={setOpen} nombre={username}/>
+      <ModalOptinsUsers active={open} id={id} permisos={permissions} setActive={setOpen} nombre={username} userIsProtected={userIsProtected}/>
     </div>
   );
 }

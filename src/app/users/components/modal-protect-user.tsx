@@ -31,7 +31,7 @@ export default function ModalProtectUser({ id, activeProtect, setActiveProtect }
             const stateProtectUser = await secureFetch(`${API_URL}accounts/setprotecteduser/${id}`, 'PUT', null)
 
             if (stateProtectUser?.state.ok) {
-                setMessage('!Usuario protegido con exito!')
+                setMessage('¡Éxito | Usuario protegido con exito!')
                 
                 setTimeout(() => {
                     setLoading(false)

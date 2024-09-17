@@ -68,9 +68,9 @@ export default function Users() {
 
                     <div className="roles-table-70">
                         {loading ? <p>Cargando...</p> :
-                            users.map((u: IUsers) => {
+                            users.map((u: any) => {
                                 return (
-                                    <CardUser id={u.id} username={u.username} permissions={u.permissions} key={u.id} configuracion={u.configuracion} />
+                                    <CardUser id={u.id} username={u.username} permissions={u.permissions} key={u.id} configuracion={u.configuracion} userIsProtected={u.protected}/>
                                 )
                             })
                         }
