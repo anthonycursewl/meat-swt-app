@@ -1,78 +1,71 @@
-import { useEffect } from "react"
-import { getCookie } from "../auth/services/getCookie"
-import { thrVerifyUser } from "./services/thrVerifyUser"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getCookie } from "../auth/services/getCookie";
+import { thrVerifyUser } from "./services/thrVerifyUser";
 import { Navigate } from "react-router-dom";
 import { thrVerifyUserRefresh } from "./services/thrVerifuUserRefresh";
 
 export default function ProtectedRoutes({ children }: any) {
-    const [loading, setLoading] = useState<boolean | null>(null);
-    const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState<boolean | null>(null);
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
 
+  const verifyUser = async () => {
+    setLoading(true);
+    const AuthToken = getCookie("AuthToken");
 
-    const verifyUser = async () => {
-        const AuthToken = getCookie('AuthToken')
+    if (AuthToken !== null) {
+      const state = await thrVerifyUser(AuthToken, () => {}, () => {});
 
-        if (AuthToken !== null) {
-            const state = await thrVerifyUser(AuthToken, setLoading, setIsAuth);
-            
-            if (loading === false) {
-                setIsAuth(true)
-            }
+      if (state?.error) {
+        console.log(state?.error);
+        const AuthRefreshToken = getCookie("RefreshToken");
 
-            if (state?.error) {
-                console.log(state?.error)
-                const AuthRefreshToken = getCookie('RefreshToken');
-                
-                if (AuthRefreshToken) { 
-                    const rt = await thrVerifyUserRefresh(AuthRefreshToken, setLoading, setIsAuth);
-                    
-                    if (rt?.error) {
-                        console.log(rt?.error)
-                        setIsAuth(false)
-                    }
-                }
-            }
+        if (AuthRefreshToken) {
+          const rt = await thrVerifyUserRefresh(AuthRefreshToken, () => {}, () => {});
+
+          if (rt?.error) {
+            console.log(rt?.error);
+            setIsAuth(false);
+          } else {
+            setIsAuth(true);
+          }
         }
-
-        else {
-            const AuthRefreshToken = getCookie('RefreshToken');
-            if (AuthRefreshToken !== null) {
-                const rt = await thrVerifyUserRefresh(AuthRefreshToken, setLoading, setIsAuth);
-                
-                if (rt?.error) {
-                    console.log(rt?.error)
-                    setIsAuth(false)
-                    setLoading(false)
-                }
-            } else {
-                setIsAuth(false)
-                setLoading(false)
-            }
-        }
-    }
-
-    useEffect(() => {
-        verifyUser()
-    }, [children])
-
-    if (loading === null) {
-        return (
-            <div>
-                Cargando...
-            </div>
-        )
-    } else if (isAuth === null) {
-        return (
-            <div>
-                Verificando...
-            </div>
-        )
+      } else {
+        setIsAuth(true);
+      }
     } else {
-        if (!isAuth) {
-            return <Navigate to="/login" />
+      const AuthRefreshToken = getCookie("RefreshToken");
+      if (AuthRefreshToken !== null) {
+        const rt = await thrVerifyUserRefresh(AuthRefreshToken, () => {}, () => {});
+
+        if (rt?.error) {
+          console.log(rt?.error);
+          setIsAuth(false);
         } else {
-            return children
+          setIsAuth(true);
         }
+      } else {
+        setIsAuth(false);
+      }
     }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+      verifyUser();
+  }, []);
+
+  if (loading) {
+    return (
+      <div>
+        Cargando...
+      </div>
+    );
+  } else if (isAuth === null) {
+    return null;
+  } else if (isAuth === false) {
+    return <Navigate to="/login" />;
+  } else {
+    return children;
+  }
 }
