@@ -1,0 +1,85 @@
+.dashboard-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.dashboard-head {
+    width: 30%;
+}
+
+
+/* ESTILOS DE LOS PRODUCTOS EN EL DASHBOARD */
+
+.dashboard-p-form {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+}
+
+.form-products div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+
+.form-products div input, textarea {
+    padding: .5rem;
+    width: 100%;
+    border-radius: .8rem;
+    color: unset;
+    background: #cccccc;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    outline: none;
+    resize: none;
+}
+
+.form-products {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-products-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-products-button button {
+    width: 90%;
+    padding: .5rem;
+    border-radius: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    border: none;
+    background: #aeacb3;
+    color: white;
+    transition: .2s ease-in-out;
+    border: 1px solid transparent;
+    margin-top: 1rem;
+}
+
+.form-products-button button:hover {
+    transition: .2s ease-in-out;
+    color: rgb(99, 99, 99);
+    background: transparent;
+    border: 1px solid #b9b0b0;
+    cursor: pointer;
+}
+
+
+/* ESTILOS DE LOS PRODUCTOS EN EL DASHBOARD */
