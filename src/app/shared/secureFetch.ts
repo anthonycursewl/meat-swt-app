@@ -7,6 +7,8 @@ export const secureFetch: any = async (url: string, method: string, body: any) =
 
     if (AuthToken === null && AuthRefreshToken !== null) {
         await refreshUser(AuthRefreshToken);
+        AuthToken = getCookie("AuthToken");
+
     }
     
     try {
@@ -21,6 +23,7 @@ export const secureFetch: any = async (url: string, method: string, body: any) =
 
         if (data.status === 403) {
             await refreshUser(AuthRefreshToken !== null ? AuthRefreshToken : "");
+            AuthToken = getCookie("AuthToken");
             const state = await fetch(url, {
                 method: method,
                 headers: {
