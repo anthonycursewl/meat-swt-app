@@ -1,15 +1,15 @@
 import { ContainerMain } from "./components/container-main";
 import ShowCurrentPath from "../components/ShowCurrentPath";
 import NavbarDash from "../dashboard/navbar/navbar-dash";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { secureFetch } from "../shared/secureFetch";
 import { API_URL } from "../../config/config.brd";
-import { useState, useEffect, useMemo, act } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./set-role.css";
 
 export default function SetRole() {
   // Recuperar el id del param
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<any>({});
   const [allRoles, setAllRoles] = useState([]);
   
   
@@ -89,8 +89,7 @@ export default function SetRole() {
 
   const eliminarRol = async (active: string) => {
 
-    
-    const newUserPermissions = user.permissions.filter(role => role.id !== active);
+    const newUserPermissions = user?.permissions?.filter(role => role.id !== active);
     setUser({ ...user, permissions: newUserPermissions });
 
     const stateDeleteRole = await secureFetch(

@@ -13,6 +13,7 @@ import CreateUser from "./app/users/create-user";
 import ChangeUserPassword from "./app/users/change-user-password";
 import SetRole from "./app/roles/set-role";
 import { Navigate } from "react-router-dom";
+import Products from "./app/products/products";
 
 function App() {
   return (
@@ -99,6 +100,15 @@ function App() {
             element={
               <ProtectedRoutes>
                 <SetRole />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/products"
+            element={
+              <ProtectedRoutes>
+                <Products />
               </ProtectedRoutes>
             }
           />

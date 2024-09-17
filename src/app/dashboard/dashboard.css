@@ -1,15 +1,15 @@
 .dashboard-container {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 3rem;
+    flex-direction: column;
+    margin-top: 1rem;
 }
 
 .dashboard-head {
     width: 30%;
 }
-
 
 /* ESTILOS DE LOS PRODUCTOS EN EL DASHBOARD */
 
@@ -52,32 +52,26 @@
     gap: 1.5rem;
 }
 
-.form-products-button {
-    display: flex;
+.form-products button {
+    padding: .5rem 1rem;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 1rem;
+    display: flex;  
     align-items: center;
     justify-content: center;
-    width: 100%;
-}
-
-.form-products-button button {
-    width: 90%;
-    padding: .5rem;
-    border-radius: 1rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    border: none;
+    gap: .5rem;
     background: #aeacb3;
-    color: white;
+    border: none;
     transition: .2s ease-in-out;
     border: 1px solid transparent;
-    margin-top: 1rem;
 }
 
-.form-products-button button:hover {
+.form-products button:hover {
     transition: .2s ease-in-out;
-    color: rgb(99, 99, 99);
+    color: rgb(255, 114, 114);
     background: transparent;
-    border: 1px solid #b9b0b0;
+    border: 1px solid #b98a8a;
+    transition: .2s  ease-in-out;
     cursor: pointer;
 }
 

@@ -21,7 +21,6 @@ export default function NavbarDash() {
 
     const getCurrentPath = () => {
         const path = window.location.pathname
-        console.log(path)
         return path
     }
 
@@ -42,6 +41,11 @@ export default function NavbarDash() {
                     <div className={`${getCurrentPath() === '/dashboard/users' ? 'click-profile-active' : null} click-profile`}  onClick={() => navigate('/dashboard/users')}>
                         <p>Usuarios</p>
                         <img src="/svgs/svg-user-nav.svg" alt="Icono para abrir el apartado de Usuarios" />
+                    </div>
+
+                    <div className={`${getCurrentPath() === '/dashboard/users' ? 'click-profile-active' : null} click-profile`}  onClick={() => navigate('/dashboard/products')}>
+                        <p>Productos</p>
+                        <img src="/icons/icon-products.svg" alt="Icono para abrir el apartado de Usuarios" />
                     </div>
 
                     <div className='click-profile' onClick={handleLogout}>

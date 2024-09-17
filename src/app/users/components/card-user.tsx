@@ -13,11 +13,12 @@ export default function CardUser({ id, username, permissions, userIsProtected }:
   return (
     <div className="al-roles-group" onClick={() => openModal()}>
       <div className="al-roles-card">
+        <p className="al-role-name">Email</p>
         <p id="email-user">{username}</p>
       </div>
 
       <div className="al-roles-card">
-        <p className="al-role-name">Rol</p>
+        <p className="al-role-name" id="email-user">Rol</p>
         {permissions?.length !== 0 ? permissions.slice(0,1).map((permission: any) => (
             <p>{permission.nombre}</p>
         ))
@@ -27,7 +28,7 @@ export default function CardUser({ id, username, permissions, userIsProtected }:
       <div className="al-roles-card">
         <p className="al-role-name">Permisos</p> 
         {
-          permissions?.length === 0 ? <p>N/A</p> : <p>{permissions?.slice(0,1).map((p: any) => p.permisos)}</p>
+          permissions?.length === 0 ? <p>N/A</p> : <p id="email-user">{permissions?.slice(0,1).map((p: any) => p.permisos)}</p>
         }
       </div>
 

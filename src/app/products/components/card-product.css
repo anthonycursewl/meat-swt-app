@@ -1,0 +1,48 @@
+.card-product {
+    background: linear-gradient(70deg, #ecebeb, #e9e2f1, #ecebeb, #ede5f7);
+    border-radius: 1rem;
+    border: 1px solid #dddbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.card-product-title img {
+    width: 105px;
+    height: auto;
+}
+
+.card-product-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.card-product-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: rgb(172, 88, 88);
+    width: 100%;
+}
+
+.card-product-description {
+    width: 100%;
+}
+
+.card-product-description textarea {
+    resize: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    padding: 1rem .5rem .2rem .5rem;
+    border-top: 1px solid #b9b9b9;
+}
