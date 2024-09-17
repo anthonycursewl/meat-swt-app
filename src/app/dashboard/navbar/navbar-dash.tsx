@@ -19,6 +19,12 @@ export default function NavbarDash() {
         eliminarCookie('RefreshToken')
     }
 
+    const getCurrentPath = () => {
+        const path = window.location.pathname
+        console.log(path)
+        return path
+    }
+
     return (
         <nav className='navbar-dash'>
 
@@ -28,14 +34,14 @@ export default function NavbarDash() {
                 </div>
 
                 <div className='navbar-links'>
-                    <div className='click-profile' onClick={() => navigate('/dashboard/roles')}>
+                    <div className={`${getCurrentPath() === '/dashboard/roles' ? 'click-profile-active' : null} click-profile`} onClick={() => navigate('/dashboard/roles')}>
                         <p>Roles</p>
-                        <img src="/icons/click-profile.svg" alt="Icono para abrir el perfil" />
+                        <img src="/icons/icon-roles-g.svg" alt="Icono para abrir el perfil" />
                     </div>
 
-                    <div className='click-profile' onClick={() => navigate('/dashboard/users')}>
+                    <div className={`${getCurrentPath() === '/dashboard/users' ? 'click-profile-active' : null} click-profile`}  onClick={() => navigate('/dashboard/users')}>
                         <p>Usuarios</p>
-                        <img src="/icons/click-profile.svg" alt="Icono para abrir el apartado de Usuarios" />
+                        <img src="/svgs/svg-user-nav.svg" alt="Icono para abrir el apartado de Usuarios" />
                     </div>
 
                     <div className='click-profile' onClick={handleLogout}>
