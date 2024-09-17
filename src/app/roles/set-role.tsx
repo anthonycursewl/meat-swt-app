@@ -4,214 +4,164 @@ import NavbarDash from "../dashboard/navbar/navbar-dash";
 import { useNavigate, useParams } from "react-router-dom";
 import { secureFetch } from "../shared/secureFetch";
 import { API_URL } from "../../config/config.brd";
-import { useState, useEffect } from "react";
-import './set-role.css'
-import { ModalWarn } from "../auth/modal/modal-warn";
+import { useState, useEffect, useMemo, act } from "react";
+import "./set-role.css";
 
 export default function SetRole() {
-    // Recuperar el id del param
-    const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [loadingRoles, setLoadingRoles] = useState(false)
-    const [roles, setRoles] = useState([])
+  // Recuperar el id del param
+  const [user, setUser] = useState<any>();
+  const [loading, setLoading] = useState(false);
 
-    // Estados del modal para mostrar alertas
-    const [active, setActive] = useState(false);
-    const [error, setError] = useState('');
+  // Recuperar los roles en generl
+  const [allRoles, setAllRoles] = useState<any>();
+  const [loadingRoles, setLoadingRoles] = useState<any>(false);
 
-    // Estados para los roles 
-    const [selectedRole, setSelectedRole] = useState<any>('')
-    const [currentRoles, setCurrentRoles] = useState<any>([])
+  const { id } = useParams();
 
-    // Estados para el modal de eliminación
-    const [activeDelete, setActiveDelete] = useState(false);
-    const [errorDelete, setErrorDelete] = useState('');
-    const [loadingDelete, setLoadingDelete] = useState(false);
+  const getAllUsers = async () => {
+    setLoading(true);
+    const response = await secureFetch(
+      `${API_URL}accounts/getallaccounts`,
+      "GET",
+      null
+    );
 
-    const selectRoleByCard = (id: string) => {
-        if (selectedRole === id) {
-            setSelectedRole('')
-            return
-        }
+    if (response?.state.ok) {
+      const data = await response.state.json();
+      const userFiltered = data?.filter((user: any) => user.id === id)[0];
+      setUser(userFiltered);
+      setLoading(false);
+    } else {
+      const error = await response?.state.status;
+      console.log(`ERROR ROLES ${error}`);
+      setLoading(false);
+    }
+  };
 
-        setSelectedRole(id)
+  const getAllRoles = async () => {
+    setLoadingRoles(true);
+    const response = await secureFetch(
+      `${API_URL}roles/getallroles`,
+      "GET",
+      null
+    );
+    if (response?.state.ok) {
+      const data = await response.state.json();
+      setAllRoles(data);
     }
 
-    const navigate = useNavigate()
+    setLoadingRoles(false);
+  };
 
-    const { id } = useParams()
+  useEffect(() => {
+    getAllUsers();
+    getAllRoles();
+  }, []);
 
-    const getAllUsers = async () => {
-        setLoading(true)
-        const response = await secureFetch(`${API_URL}accounts/getallaccounts`, 'GET', null)
+  const getFilteredRoles = useMemo(() => {
+    return allRoles?.filter(
+      (role: any) => !user?.permissions.map((r: any) => r.id).includes(role.id)
+    );
+  }, [allRoles, user]);
 
-        if (response?.state.ok) {
-            const data = await response.state.json()
-            const userFiltered = data?.filter((user: any) => user.id === id)
-            setUsers(userFiltered)
+  const asignarRole = async (active: string) => {
+    const stateSetRole = await secureFetch(
+      `${API_URL}roles/setroletouser`,
+      "POST",
+      {
+        userId: id,
+        permissionId: active,
+      }
+    );
 
-            userFiltered?.map((perm: any) => {
-                perm.permissions?.map((p: any) => {
-                    console.log(p)
-                    setCurrentRoles([...currentRoles, p.id, p.nombre])
-                })
-            })
-            
-            setLoading(false)
-        } else {
-            const error = await response?.state.status
-            console.log(`ERROR ROLES ${error}`)
-            setLoading(false)
-        }
+    if (stateSetRole?.state.ok) {
+      console.log("Rol asignado");
+      getAllUsers();
+    } else {
+      console.log("Error | No se pudo asignar el rol");
     }
+  };
 
-    useEffect(() => {
-        getAllUsers()
-    }, [id])
+  const eliminarRol = async (active: string) => {
+    const stateDeleteRole = await secureFetch(
+      `${API_URL}roles/deleteroletouser`,
+      "DELETE",
+      {
+        userId: id,
+        permissionId: active,
+      }
+    );
 
-
-    const getAllRoles = async () => {
-        setLoadingRoles(true)
-        const response = await secureFetch(`${API_URL}roles/getallroles`, 'GET', null)
-
-        if (response?.state.ok) {
-            const data = await response.state.json()
-            console.log(`DATA AQUI ROLES ${data}`)
-            setRoles(data)
-            setLoadingRoles(false) 
-        } else {
-            const error = await response?.state.status
-            console.log(`ERROR ROLES ${error}`)
-            setLoadingRoles(false)
-        }
+    if (stateDeleteRole?.state.ok) {
+      console.log("Rol removido");
+      getAllUsers();
+    } else {
+      console.log("Error | No se pudo remover el rol. Intenta de nuevo!");
     }
+  };
 
-    useEffect(() => {
-        getAllRoles()
-    }, [])
+  return (
+    <>
+      <NavbarDash />
 
-    const asignarRole = async () => {
-        if (selectedRole === '') {
-            setActive(true)
-            setError('Error | Tienes que elegir un rol!')
-            return
-        }
+      {loading ? (
+        <div>Cargando...</div>
+      ) : (
+        <ContainerMain>
+          <ShowCurrentPath path="Dashboard &gt; Usuarios &gt; Asignar rol" />
 
-        if (currentRoles.includes(selectedRole)) {
-            setActive(true)
-            setError('Error | El rol ya se encuentra asignado')
-            return
-        }
+          <div key={user?.id} className="user-title">
+            <img src="/icons/icon-info.svg" alt="Icon Información de Roles" />
+            <p>
+              Gestionando Roles &gt;{" "}
+              <span className="user-colors-global">{user?.username}</span>
+            </p>
+          </div>
 
-        const stateSetRole = await secureFetch(`${API_URL}roles/setroletouser`, 'POST', {
-            userId: id,
-            permissionId: selectedRole
-        })
+          <div>
+            <h1>@ Roles Actuales</h1>
+          </div>
 
-        if (stateSetRole?.state.ok) {
-            console.log('Rol asignado')
-            setActive(true)   
-            setError('¡El Rol ha sido asignado con éxito!')
-            navigate('/dashboard/users')
-        } else {
-            setActive(true)
-            setError('Error | No se pudo asignar el rol')
-        }
-    }
-
-    const openModalDelete = () => {
-        setErrorDelete('¿Estás remover este rol a este usuario?')
-        setActiveDelete(true)
-    }
-
-    const deleteRoleToUser = async () => {
-        if (selectedRole === '') {
-            setActive(true)
-            setError('Error | Tienes que elegir un rol para remover!')
-            return
-        }
-
-        if (!currentRoles.includes(selectedRole)) {
-            setActive(true)
-            setError('Error | El rol no se encuentra asignado')
-            return
-        }
-
-        setLoadingDelete(true)
-        const stateDeleteRole = await secureFetch(`${API_URL}roles/deleteroletouser`, 'DELETE', {
-            userId: id,
-            permissionId: selectedRole
-        })
-
-        if (stateDeleteRole?.state.ok) {
-            console.log('Rol removido')
-            setActive(true)   
-            setError('¡El Rol ha sido removido con éxito!')
-            navigate('/dashboard/users')
-        } else {
-            setActive(true)
-            setError('Error | No se pudo remover el rol. Intenta de nuevo!')
-        }
-    }
-
-    return (
-        <>
-        <NavbarDash />
-        
-        {loading ? <div>Cargando...</div> :
-            <ContainerMain>
-            
-            <ShowCurrentPath path="Dashboard &gt; Usuarios &gt; Asignar rol"/>
-
-                {users?.map((user: any) => (
-                    <div key={user.id} className="user-title">
-                        <img src="/icons/icon-info.svg" alt="Icon Información de Roles" />
-                        <p>Gestionando Roles &gt; <span className="user-colors-global">{user.username}</span></p>
-                    </div>
+          <div className="al-roles-d">
+            {loading ? (
+              <div>Cargando...</div>
+            ) : (
+              <>
+                {user?.permissions?.map((role: any) => (
+                  <div
+                    key={role.id}
+                    className={`al-roles-card-d `}
+                    onClick={() => eliminarRol(role.id)}
+                  >
+                    <img src="/icons/icon-roles.svg" alt="Icono de los Roles" />
+                    <p>{role.nombre}</p>
+                  </div>
                 ))}
-                
-                <div>
-                    <h1>@ Roles Actuales</h1>
-                </div>
+              </>
+            )}
+          </div>
 
-                <div className="al-roles-d">
-                    {
-                    loadingRoles ? <div>Cargando...</div> :
-                    currentRoles?.map((role: any) => (
-                        <div key={role.id} className={`al-roles-card-d ${selectedRole === role.id ? 'selected' : ''}`} onClick={() => selectRoleByCard(role.id)}>
-                            <img src="/icons/icon-roles.svg" alt="Icono de los Roles" />
-                            <p>{role.nombre}</p>
-                        </div>
-                    ))
-                    }
-                </div>
-
-                <div>
-                    <h1>@ Roles disponibles</h1>
-                </div>
-                
-                <div className="al-roles-d">
-                    {
-                    loadingRoles ? <div>Cargando...</div> :
-                    roles?.map((role: any) => (
-                        <div key={role.id} className={`al-roles-card-d ${selectedRole === role.id ? 'selected' : ''}`} onClick={() => selectRoleByCard(role.id)}>
-                            <img src="/icons/icon-roles.svg" alt="Icono de los Roles" />
-                            <p>{role.nombre}</p>
-                        </div>
-                    ))
-                    }
-                </div>
-
-                <div className="btn-set-role">
-                    <button onClick={asignarRole}>Asignar rol</button>
-                    <button onClick={openModalDelete}>Eliminar rol</button>
-                </div>
+          <div>
+            <h1>@ Roles totales</h1>
+          </div>
+          <div className="al-roles-d">
+            {loading ? (
+              <div>Cargando...</div>
+            ) : (
+              <>
+                {getFilteredRoles?.map((role: any) => (
+                  <div key={role.id} className={`al-roles-card-d `}
+                    onClick={() => asignarRole(role.id)}
+                  >
+                    <img src="/icons/icon-roles.svg" alt="Icono de los Roles" />
+                    <p>{role.nombre}</p>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
         </ContainerMain>
-        }
-
-        <ModalWarn error={errorDelete} active={activeDelete} setActive={setActiveDelete} dynamicFunction={deleteRoleToUser} loading={loadingDelete} />
-
-        <ModalWarn active={active} setActive={setActive} error={error}/>
-        </>
-    )
+      )}
+    </>
+  );
 }

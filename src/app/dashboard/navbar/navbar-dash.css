@@ -10,6 +10,10 @@
     }
 }
 
+.click-profile-active {
+    background: #adadad;
+}
+
 .navbar-dash {
     display: flex;
     align-items: center;
