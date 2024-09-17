@@ -12,6 +12,7 @@ import Users from "./app/users/users";
 import CreateUser from "./app/users/create-user";
 import ChangeUserPassword from "./app/users/change-user-password";
 import SetRole from "./app/roles/set-role";
+import { Navigate } from "react-router-dom";
 
 function App() {
   return (
@@ -98,6 +99,15 @@ function App() {
             element={
               <ProtectedRoutes>
                 <SetRole />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <ProtectedRoutes>
+                <Navigate to={"/dashboard"}/>
               </ProtectedRoutes>
             }
           />
