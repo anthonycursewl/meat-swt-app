@@ -19,7 +19,7 @@ export default function Invoices() {
                     <p>Facturas | Puedes registrar facturas de tipo Compra o Venta <Link to={"/dashboard/invoices/create"}>aquí.</Link></p>
                 </div>
 
-                <div>
+                <div >
                     <h1>ola</h1>
                 </div>
             </ContainerMain>

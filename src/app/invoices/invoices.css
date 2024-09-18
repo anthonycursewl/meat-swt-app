@@ -7,10 +7,10 @@
 }
 
 .invoice-form form {
-    display: grid;
+    display: flex;
     align-items: flex-start;
     justify-content: center;
-    grid-template-columns: 1fr 1fr;
+    flex-direction: column;
     width: 1000px;
     gap: 2rem;
 }
@@ -43,4 +43,51 @@
 .invoice-form-inp textarea {
     height: 100px;
     background: #f1ebeb;
+}
+
+.inv-add-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .2rem;
+    font-size: .8rem;
+    background: linear-gradient(10deg, #eedcf7, #f5f3f3, #f7e3e3);
+    padding: .5rem .5rem;
+    border-radius: 1rem;
+    width: 180px;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+}
+
+.inv-add-details:hover {
+    background: linear-gradient(10deg, #e9cdf8, #f5f3f3, #f8decc);
+    transition: .2s ease-in-out;
+}
+
+.inv-add-details label {
+    cursor: pointer;
+}
+
+.inv-add-details img {
+    width: 20px;
+    height: auto;
+}
+
+.div-with-all-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid #e6e6e6;
+    height: 318px;
+    max-height: 500px;
+    overflow: hidden;
+    transition: .2s ease-in-out;
+}
+
+.div-with-all-info-2 {
+    height: 450px;
+    transition: .2s ease-in-out;
 }
