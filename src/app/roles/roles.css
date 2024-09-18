@@ -149,6 +149,26 @@
     width: 100%;
 }
 
+.al-roles-de {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+}
+
+.al-roles-de p img {
+    width: 26px;
+    height: auto;
+}
+
+.al-roles-de p {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .3rem;
+}
+
 .al-roles-card {
     display: flex;
     align-items: flex-start;

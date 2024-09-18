@@ -26,10 +26,6 @@ export const ModalProfile = ({ active, setActive, id }: Props) =>  {
                 
                 <ul className='list-links'>
                     <li>
-                        <img src="/icons/icon-modal-profile.svg" alt="Icon Perfil" />
-                        <Link to={`/dashboard/profile/${id}`}>Perfil</Link>
-                    </li>
-                    <li>
                         <img src="/icons/icon-modal-access.svg" alt="Icon Acceso" />
                         <Link to={`/dashboard/control`}>Control de Accesos</Link>
                     </li>

@@ -12,12 +12,24 @@ export default function CardRole({ id, nombre, permisos }: IRoles) {
   return (
     <div className="al-roles-group" onClick={() => openModal()}>
       <div className="al-roles-card">
-        <p className="al-role-name">Rol</p>
+
+        <div className="al-roles-de">
+            <p className="al-role-name">
+              <img src="/icons/icon-roles.svg" alt="Icono de rol" />
+              Rol
+            </p>
+        </div>
+
         <p>{nombre}</p>
       </div>
 
       <div className="al-roles-card">
-        <p className="al-role-name">Permisos</p>
+        <div className="al-roles-de">
+              <p className="al-role-name">
+                <img src="/icons/icon-permiso.svg" alt="Icono de Permisos" />
+                Permisos
+              </p>
+          </div>
         <p id="role-perms">{permisos}</p>
       </div>
 
