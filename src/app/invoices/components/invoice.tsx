@@ -12,7 +12,7 @@ export default function Invoice() {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [actualPrice, setActualPrice] = useState(0);
   const formRef = useRef<any>();
 
   // Estado para más detalles
@@ -99,6 +99,12 @@ export default function Invoice() {
     const filteredProducts = productAdded.filter((p: any) => p.id !== id);
 
     setProductAdded(filteredProducts);
+  };
+
+  const handleProductChange = (e: any) => {
+    setActualPrice(e.price);
+
+    setSelectedProducts(e);
   };
 
   const handleSumbit = async (e: any) => {
@@ -211,42 +217,45 @@ export default function Invoice() {
             </div>
           </div>
 
-          <div className="invoice-form-inp">
-            <label>Producto</label>
-            <select
-              name="product"
-              id="product"
-              onChange={(e) => {
-                setSelectedProducts(e.target.value);
-              }}
-            >
-              {products?.map((product: any) => {
-                return (
-                  <option
-                    key={product.id}
-                    value={product.id}
-                    data-price={product.precio}
-                  >
-                    {product.nombre} | ${product.precio}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          <div>
+            <div className="invoice-form-inp">
+              <label>Producto</label>
+              <select
+                name="product"
+                id="product"
+                onChange={(e) => {
+                  handleProductChange(e.target.value);
+                }}
+              >
+                {products?.map((product: any) => {
+                  return (
+                    <option
+                      key={product.id}
+                      value={product.id}
+                      data-price={product.precio}
+                    >
+                      {product.nombre} | ${product.precio}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
 
-          <div className="invoice-form-inp">
-            <label>Cantidad</label>
-            <input type="number" name="cantidad" id="cantidad" />
-          </div>
+            <div className="invoice-form-inp">
+              <label>Cantidad</label>
+              <input type="number" name="cantidad" id="cantidad" />
+            </div>
 
-          <div className="invoice-button">
-            <button onClick={handleAddProduct}>
-              <img
-                src="/icons/icon-create-product.svg"
-                alt="Icon Create Product"
-              />
-              Agregar
-            </button>
+            
+            <div className="invoice-button">
+              <button onClick={handleAddProduct}>
+                <img
+                  src="/icons/icon-create-product.svg"
+                  alt="Icon Create Product"
+                />
+                Agregar
+              </button>
+            </div>
           </div>
         </div>
 
