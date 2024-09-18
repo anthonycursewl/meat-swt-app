@@ -48,6 +48,11 @@ export default function NavbarDash() {
                         <img src="/icons/icon-products.svg" alt="Icono para abrir el apartado de Usuarios" />
                     </div>
 
+                    <div className={`${getCurrentPath() === '/dashboard/invoices' ? 'click-profile-active' : null} click-profile`}  onClick={() => navigate('/dashboard/invoices')}>
+                        <p>Facturas</p>
+                        <img src="/icons/icon-products.svg" alt="Icono para abrir el apartado de Usuarios" />
+                    </div>
+
                     <div className='click-profile' onClick={handleLogout}>
                         <p>Logout</p>
                         <img src="/icons/click-profile.svg" alt="Icono para abrir el perfil" />

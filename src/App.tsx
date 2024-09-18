@@ -16,6 +16,8 @@ import { Navigate } from "react-router-dom";
 import Products from "./app/products/products";
 import CreateProduct from "./app/products/create-product";
 import EditProduct from "./app/products/edit-product";
+import Invoices from "./app/invoices/invoices";
+import CreateInvoice from "./app/invoices/create-invoice";
 
 function App() {
   return (
@@ -129,6 +131,24 @@ function App() {
             element={
               <ProtectedRoutes>
                 <EditProduct />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/invoices"
+            element={
+              <ProtectedRoutes>
+                <Invoices />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/invoices/create"
+            element={
+              <ProtectedRoutes>
+                <CreateInvoice />
               </ProtectedRoutes>
             }
           />

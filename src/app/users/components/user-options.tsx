@@ -90,12 +90,8 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre, user
                 <ul className='options-list-links'>
                     <div className='options-perms'>
                         {
-                            permisos?.map((permission: any, index: number) => {
-                                return (
-                                    <>
-                                        <p key={index}>{permission.permisos}</p>
-                                    </>
-                                )
+                            permisos?.map((permission: any) => {
+                                return <p key={permission.id}>{permission.permisos}</p>
                             })
                         }
                     </div>

@@ -30,7 +30,7 @@ export default function CardProduct({ nombre, precio, descripcion, id, info }: P
             </div>
 
             <div className='card-product-description'>
-                <textarea name="" id="" value={descripcion} spellCheck="false"></textarea>
+                <textarea name="" id="" defaultValue={descripcion} spellCheck="false"></textarea>
             </div>
         </div>
 

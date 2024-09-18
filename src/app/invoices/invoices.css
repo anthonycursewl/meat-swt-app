@@ -1,0 +1,46 @@
+.invoice-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.invoice-form form {
+    display: grid;
+    align-items: flex-start;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    width: 1000px;
+    gap: 2rem;
+}
+
+.invoice-form-inp {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.invoice-form-inp label { 
+    background: #f5f3f3;
+    padding: .6rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.invoice-form-inp input, select, textarea, input {
+    width: 90%;
+    background: #f1ebeb;
+    padding: .6rem 1.5rem;
+    border-radius: 1rem;
+    color: unset;
+    outline: none;
+    border: 1px solid #d3d2d2;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.invoice-form-inp textarea {
+    height: 100px;
+    background: #f1ebeb;
+}

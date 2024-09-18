@@ -69,11 +69,7 @@ export const ModalOptinsRoles = ({ active, id, permisos, setActive, nombre }: Pr
                     <div className='options-perms'>
                         {
                             permisos?.map((permission: any) => {
-                                return (
-                                    <>
-                                        <p key={permission}>{permission}</p>
-                                    </>
-                                )
+                                return <p key={permission}>{permission}</p>
                             })
                         }
                     </div>

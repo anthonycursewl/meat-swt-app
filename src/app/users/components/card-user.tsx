@@ -29,8 +29,8 @@ export default function CardUser({ id, username, permissions, userIsProtected }:
                 Rol
               </p>
           </div>
-        {permissions?.length !== 0 ? permissions.slice(0,1).map((permission: any) => (
-            <p>{permission.nombre}</p>
+        {permissions?.length !== 0 ? permissions.slice(0,1).map((permission: any, index: number) => (
+            <p key={index}>{permission.nombre}</p>
         ))
           : <p>No hay permisos</p>}
       </div>

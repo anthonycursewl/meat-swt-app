@@ -57,7 +57,7 @@ export default function Products() {
 
                     <div className="products-cards">
                         {loading ? null : products?.map((item: any) => (
-                            <CardProduct key={item._id} nombre={item?.nombre} precio={item?.precio} descripcion={item?.descripcion} id={item.id} info={item}/>
+                            <CardProduct key={item.id} nombre={item?.nombre} precio={item?.precio} descripcion={item?.descripcion} id={item.id} info={item}/>
                         ))}
                     </div>
 
