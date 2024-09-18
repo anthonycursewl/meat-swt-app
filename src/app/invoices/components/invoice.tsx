@@ -2,10 +2,16 @@ import { useState, useEffect, useRef } from "react"
 import { secureFetch } from "../../shared/secureFetch"
 import { API_URL } from "../../../config/config.brd"
 import { useGlobalState } from "../../store/useGlobalState"
+import { ModalWarn } from "../../auth/modal/modal-warn"
 
 export default function Invoice() {
     const types = ["Compras", "Ventas"]
     const [today, setToday] = useState(new Date())
+
+    // estados para el modalwarn
+    const [loading, setLoading] = useState(false)
+    const [active, setActive] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const formRef = useRef<any>()
 
@@ -42,8 +48,21 @@ export default function Invoice() {
         
         const { product, cantidad } = formRef.current.elements;
 
-        if (product.value === '' || cantidad.value === '') {
-            alert('Error | Para agregar un producto a la factura tienes que especificar la cantidad!')
+        if (product.value === '') {
+            setErrorMessage('Error | Para agregar un producto a la factura tienes que elejir un producto!')
+            setActive(true)
+            return 
+        }
+
+        if (cantidad.value === '') {
+            setErrorMessage('Error | Para agregar un producto a la factura tienes que especificar la cantidad!')
+            setActive(true)
+            return
+        }
+
+        if (cantidad.value <= 0) {
+            setErrorMessage('Error | La cantidad tiene que ser mayor a 0!')
+            setActive(true)
             return
         }
 
@@ -53,14 +72,72 @@ export default function Invoice() {
         console.log(product.value)
         console.log(cantidad.value)
         console.log(precio)
-
-        setProductAdded([...productAdded, { id: product.value, cantidad: cantidad.value, precio: precio, nombre: nombre }])
+        setProductAdded([...productAdded, { productoId: product.value, cantidad: cantidad.value, precioIndividual: precio, nombre: nombre }])
+        
+        cantidad.value = ''
     }
 
-    const handleSumbit = (e: any) => {
+    const handleRemoveProduct = (id: any) => {
+        console.log(`TRATANDO DE FILTRAR id: ${id}`);
+      
+        const filteredProducts = productAdded.filter((p: any) => p.id !== id);
+      
+        setProductAdded(filteredProducts);
+      };
+      
+
+    const handleSumbit = async (e: any) => {
         e.preventDefault()
 
-        console.log(selectedProducts)
+        if (productAdded.length === 0) {
+            setErrorMessage('Error | Para generar una factura tienes que agregar al menos un producto!')
+            setActive(true)
+            return
+        }
+
+        setLoading(true)
+        const { type, desc, date } = formRef.current.elements;
+
+        if (type.value === '') {
+            setErrorMessage('Error | Para agregar un producto a la factura tienes que elejir un tipo!')
+            setActive(true)
+            return
+        }
+
+        if (desc.value?.length === 0) {
+            setErrorMessage('Error | Para agregar un producto a la factura tienes que describirlo!')
+            setActive(true)
+            return
+        }
+
+        if (date.value === '') {
+            setErrorMessage('Error | Para agregar un producto a la factura tienes que describirlo!')
+            setActive(true)
+            return
+        }
+
+        const stateFactura = await secureFetch(`${API_URL}transacciones/create`, 'PUT', {
+            "tipo": type.value,
+            "fecha": date.value,
+            "descripcion": desc.value.trim(),
+            "detalles": productAdded
+        });
+
+        if (stateFactura?.state.ok) {
+            setLoading(false)
+            setProductAdded([])
+            setActive(true)
+            setErrorMessage('Éxito | Factura generada correctamente!')
+
+            formRef.current.reset()
+        } else {
+            const error = await stateFactura?.state.status
+            console.log(`Error | No se pudo generar la factura! code: ${error}`)
+            setLoading(false)
+            setActive(true)
+            setErrorMessage(`Error | No se pudo generar la factura! code: ${error}`)
+        }
+
     }
 
     return (
@@ -87,7 +164,7 @@ export default function Invoice() {
                 <div>
                     <div className="invoice-form-inp">
                         <label>Fecha</label>
-                        <input type="date" min={today.toISOString().split('T')[0]}/>
+                        <input type="date" name='date' id='date' min={today.toISOString().split('T')[0]}/>
                     </div>
                 </div>
 
@@ -124,29 +201,42 @@ export default function Invoice() {
                 </div>
             </div>
 
-            <div>
-                <p>Productos agregados</p>
-
-                {
-                    productAdded?.map((product: any) => (
-                        <p key={product.id}>{product.nombre} | {product.cantidad}</p>
-                    ))
-                }
+            <div className="product-added-title">
+                <p>
+                    <img src="/icons/icon-product-added.svg" alt="Productos añadidos" />
+                    Productos agregados
+                </p>
+                
+                <div className="product-added">
+                    {
+                        productAdded?.length === 0 ? <p>No hay productos agregados</p> : productAdded?.map((product: any, index: number) => (
+                            <div onClick={() => handleRemoveProduct(product.id)} key={index}>
+                                <p>{product.nombre} | x{product.cantidad} | ${product.precioIndividual}</p>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
             
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', gap: '20px', marginBottom: '2rem'}}>
                 <div className="inv-add-details" onClick={() => {setIsMoreDetails(!isMoreDetails)}}>
                     <img src="/icons/icon-roles.svg" alt="Agregar detalles" />
-                    <label>Ver detalles</label>
+                    <label>{isMoreDetails ? 'Mostrar menos' : 'Mostrar más'}</label>
                 </div>
-
-                <div className="inv-add-details" onClick={() => {setIsMoreDetails(!isMoreDetails)}}>
+                
+                
+                    {loading ? 
+                    <div className="loader"></div> :
+                    
+                    <div className="inv-add-details" onClick={(e) => {handleSumbit(e)}}>
                     <img src="/icons/icon-roles.svg" alt="Agregar detalles" />
                     <label>Generar Factura</label>
-                </div>
+                </div>}
+                
             </div>
             
         </form>
+        <ModalWarn  active={active} setActive={setActive} error={errorMessage}/>
     </div>
     )
 }
