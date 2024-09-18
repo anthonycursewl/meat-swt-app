@@ -19,48 +19,8 @@ export default function Invoices() {
                     <p>Facturas | Puedes registrar facturas de tipo Compra o Venta <Link to={"/dashboard/invoices/create"}>aquí.</Link></p>
                 </div>
 
-                <div className="invoice-form">
-                    <form>
-
-                        <div>
-                            <div className="invoice-form-inp">
-                                <label>
-                                    Tipo de Factura
-                                </label>
-                                <select name="type" id="type">
-                                    {
-                                        types.map((type, index) => {
-                                            return (
-                                                <option key={index} value={type}>{type}</option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="invoice-form-inp">
-                                <label>Fecha</label>
-                                <input type="date" min={today.toISOString().split('T')[0]}/>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="invoice-form-inp">
-                                <label>Descripción</label>
-                                <textarea name="desc" id="desc" placeholder="Descripción de la factura...."></textarea>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="invoice-form-inp">
-                                <label>Descripción</label>
-                                <textarea name="desc" id="desc" placeholder="Descripción de la factura...."></textarea>
-                            </div>
-                        </div>
-
-                    </form>
+                <div>
+                    <h1>ola</h1>
                 </div>
             </ContainerMain>
         </>
