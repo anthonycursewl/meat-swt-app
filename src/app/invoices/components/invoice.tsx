@@ -72,7 +72,8 @@ export default function Invoice() {
         console.log(product.value)
         console.log(cantidad.value)
         console.log(precio)
-        setProductAdded([...productAdded, { productoId: product.value, cantidad: cantidad.value, precioIndividual: precio, nombre: nombre }])
+        const idDetail = crypto.randomUUID()
+        setProductAdded([...productAdded, { id: idDetail.split('-')[0], productoId: product.value, cantidad: cantidad.value, precioIndividual: precio, nombre: nombre }])
         
         cantidad.value = ''
     }
@@ -95,27 +96,27 @@ export default function Invoice() {
             return
         }
 
-        setLoading(true)
         const { type, desc, date } = formRef.current.elements;
-
+        
         if (type.value === '') {
             setErrorMessage('Error | Para agregar un producto a la factura tienes que elejir un tipo!')
             setActive(true)
             return
         }
 
-        if (desc.value?.length === 0) {
+        if (desc.value === '') {
             setErrorMessage('Error | Para agregar un producto a la factura tienes que describirlo!')
             setActive(true)
             return
         }
 
         if (date.value === '') {
-            setErrorMessage('Error | Para agregar un producto a la factura tienes que describirlo!')
+            setErrorMessage('Error | La fecha de la Factura es requerida.')
             setActive(true)
             return
         }
-
+        
+        setLoading(true)
         const stateFactura = await secureFetch(`${API_URL}transacciones/create`, 'PUT', {
             "tipo": type.value,
             "fecha": date.value,
@@ -126,16 +127,16 @@ export default function Invoice() {
         if (stateFactura?.state.ok) {
             setLoading(false)
             setProductAdded([])
-            setActive(true)
             setErrorMessage('Éxito | Factura generada correctamente!')
+            setActive(true)
 
             formRef.current.reset()
         } else {
             const error = await stateFactura?.state.status
             console.log(`Error | No se pudo generar la factura! code: ${error}`)
             setLoading(false)
-            setActive(true)
             setErrorMessage(`Error | No se pudo generar la factura! code: ${error}`)
+            setActive(true)
         }
 
     }
@@ -227,7 +228,7 @@ export default function Invoice() {
                 
                     {loading ? 
                     <div className="loader"></div> :
-                    
+
                     <div className="inv-add-details" onClick={(e) => {handleSumbit(e)}}>
                     <img src="/icons/icon-roles.svg" alt="Agregar detalles" />
                     <label>Generar Factura</label>
