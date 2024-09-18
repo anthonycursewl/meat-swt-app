@@ -6,16 +6,27 @@ import { secureFetch } from "../shared/secureFetch";
 import './products.css'
 import { useState } from "react";
 import CardProduct from "./components/card-product";
+import { Link } from "react-router-dom";
+import ShowLoading from "../components/ShowLoading";
+import { useGlobalState } from "../store/useGlobalState";
 
 export default function Products() {
     const [products, setProducts] = useState<any>([])
+    const [loading, setLoading] = useState<boolean>(true)
+
+    // Recibir la signal para recargar
+    const { signalReload }: any = useGlobalState()
+
     const getAllProducts = async () => {
+        setLoading(true)
         const state = await secureFetch(`${API_URL}productos/getall`, 'GET', null)
 
         if (!state?.state.ok) {
             alert(state?.state.error)
+            setLoading(false)
         } else {
             const data = await state?.state.json()
+            setLoading(false)
             console.log(data)
             setProducts(data)
         }
@@ -23,7 +34,7 @@ export default function Products() {
 
     useEffect(() => {
         getAllProducts()
-    }, [])
+    }, [signalReload])
 
     return (
         <>
@@ -37,13 +48,22 @@ export default function Products() {
                         <p>Productos | todos los productos que han sido registrados. Pulsa para <a style={{cursor: 'pointer', textDecoration: 'underline'}}>Editar.</a></p>
                     </div>
 
+                    <div className="products-create">
+                        <Link to={'/dashboard/products/create'}>
+                            <img src="/icons/icon-c-product.svg" alt="" />
+                            Crear producto
+                        </Link>
+                    </div>
+
                     <div className="products-cards">
-                        {products?.map((item: any) => (
-                            <CardProduct key={item._id} nombre={item?.nombre} precio={item?.precio} descripcion={item?.descripcion}/>
+                        {loading ? null : products?.map((item: any) => (
+                            <CardProduct key={item._id} nombre={item?.nombre} precio={item?.precio} descripcion={item?.descripcion} id={item.id} info={item}/>
                         ))}
                     </div>
 
                 </div>
+
+                {loading ? <ShowLoading /> : null}
             </ContainerMain>
         </>
     );

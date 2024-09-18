@@ -7,6 +7,14 @@
     justify-content: center;
     flex-direction: column;
     gap: .5rem;
+    transition: .2s ease-in-out;
+}
+
+.card-product:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+    background: linear-gradient(70deg, #ecebeb, #e8daf8, #ecebeb, #f7e5e5);
+    transition: .2s ease-in-out;
 }
 
 .card-product-title img {
@@ -44,6 +52,7 @@
     border: none;
     padding: 0;
     border-radius: 0;
-    padding: 1rem .5rem .2rem .5rem;
-    border-top: 1px solid #b9b9b9;
+    padding: .8rem 1rem 0 1rem;
+    border-top: 1px solid #c5c4c4;
+    cursor: pointer;
 }

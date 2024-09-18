@@ -7,6 +7,7 @@ import { IRoles } from "./interfaces/intRoles"
 import { useGlobalState } from "../store/useGlobalState"
 import { Link } from "react-router-dom"
 import CardRole from "./components/card-role"
+import ShowLoading from "../components/ShowLoading"
 
 // Componente para mostrar la ruta actual
 import ShowCurrentPath from "../components/ShowCurrentPath"
@@ -67,7 +68,7 @@ export default function Roles() {
                     </div>
 
                     <div className="roles-table-70">
-                        {loading ? <p>Cargando...</p> :
+                        {loading ? null :
                             roles.map((role: IRoles) => {
                                 return (
                                     <CardRole setActive={setActive} active={active} handleOpenModal={handleOpenMdodal} id={role.id} nombre={role.nombre} permisos={role.permisos} key={role.id}/>
@@ -76,8 +77,10 @@ export default function Roles() {
                         }
                     </div>
                 </div>
-
+                
+                {loading ? <ShowLoading /> : null}
             </div>
+
             
         </section>
         </>

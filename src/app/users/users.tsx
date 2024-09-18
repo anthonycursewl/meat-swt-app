@@ -2,14 +2,15 @@ import NavbarDash from "../dashboard/navbar/navbar-dash"
 import { useEffect, useState } from "react"
 import { secureFetch } from "../shared/secureFetch"
 import { API_URL } from "../../config/config.brd"
-import { IRoles } from "../roles/interfaces/intRoles"
 import { useGlobalState } from "../store/useGlobalState"
 import { Link } from "react-router-dom"
 
 // Componente para mostrar la ruta actual
 import ShowCurrentPath from "../components/ShowCurrentPath"
 import CardUser from "./components/card-user"
-import { IUsers } from "./interfaces/AllInterfaces"
+
+// Estado de carga
+import ShowLoading from "../components/ShowLoading"
 
 export default function Users() {
     const [users, setUsers] = useState([])
@@ -67,7 +68,7 @@ export default function Users() {
                     </div>
 
                     <div className="roles-table-70">
-                        {loading ? <p>Cargando...</p> :
+                        {loading ? null :
                             users.map((u: any) => {
                                 return (
                                     <CardUser id={u.id} username={u.username} permissions={u.permissions} key={u.id} configuracion={u.configuracion} userIsProtected={u.protected}/>
@@ -76,6 +77,8 @@ export default function Users() {
                         }
                     </div>
                 </div>
+
+                {loading ? <ShowLoading /> : null}
 
             </div>
             

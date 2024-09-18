@@ -14,6 +14,8 @@ import ChangeUserPassword from "./app/users/change-user-password";
 import SetRole from "./app/roles/set-role";
 import { Navigate } from "react-router-dom";
 import Products from "./app/products/products";
+import CreateProduct from "./app/products/create-product";
+import EditProduct from "./app/products/edit-product";
 
 function App() {
   return (
@@ -109,6 +111,24 @@ function App() {
             element={
               <ProtectedRoutes>
                 <Products />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/products/create"
+            element={
+              <ProtectedRoutes>
+                <CreateProduct />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/dashboard/products/edit/:id"
+            element={
+              <ProtectedRoutes>
+                <EditProduct />
               </ProtectedRoutes>
             }
           />
