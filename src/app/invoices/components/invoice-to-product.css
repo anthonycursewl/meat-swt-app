@@ -1,0 +1,19 @@
+.div-p-all {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid #e6e6e6;
+    height: 80px;
+    overflow: hidden;
+    transition: .3s ease-in-out;
+    opacity: 0.5;
+}
+
+.div-p-all-2 {
+    height: 330px;
+    opacity: 1;
+    transition: .3s ease-in-out;
+}

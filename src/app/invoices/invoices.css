@@ -81,8 +81,7 @@
     padding: 1.5rem;
     border-radius: 1rem;
     border: 1px solid #e6e6e6;
-    height: 318px;
-    max-height: 500px;
+    height: 325px;
     overflow: hidden;
     transition: .2s ease-in-out;
 }
@@ -90,4 +89,31 @@
 .div-with-all-info-2 {
     height: 450px;
     transition: .2s ease-in-out;
+}
+
+.invoice-button button {
+    background: #f5f3f3;
+    padding: .6rem 1.5rem;
+    border-radius: 1rem;
+    color: unset;
+    outline: none;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    border: 1px solid #e7e4e4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    transition: .2s ease-in-out;
+}
+
+.invoice-button button:hover {
+    border: 1px solid #d3d2d2;
+    background: #e7e6e6;
+    transition: .2s ease-in-out;
+}
+
+.invoice-button button img {
+    width: 20px;
+    height: auto;
 }
