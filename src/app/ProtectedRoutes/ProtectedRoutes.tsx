@@ -27,9 +27,11 @@ export default function ProtectedRoutes({ children }: any) {
             setIsAuth(false);
           } else {
             setIsAuth(true);
+            console.log(rt)
           }
         }
       } else {
+        console.log(state);
         setIsAuth(true);
       }
     } else {
@@ -42,6 +44,7 @@ export default function ProtectedRoutes({ children }: any) {
           setIsAuth(false);
         } else {
           setIsAuth(true);
+          console.log(rt)
         }
       } else {
         setIsAuth(false);

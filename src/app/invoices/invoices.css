@@ -177,3 +177,30 @@
     width: 20px;
     height: auto;
 }
+
+.invoices-to-show {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    gap: 1rem;
+}
+
+
+.invoices-to-show .child-invoice {
+    background: #f0efef;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid #cfcfcf;
+}
+
+.invoices-to-show {
+    cursor: pointer;
+}
+
+.invoice-title-we {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
