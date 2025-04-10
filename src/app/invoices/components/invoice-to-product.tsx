@@ -1,8 +1,8 @@
-import { useState, useRef } from "react"
+import { useState, useRef, lazy, Suspense } from "react"
 import './invoice-to-product.css'
 import { secureFetch } from "../../shared/secureFetch"
 import { API_URL } from "../../../config/config.brd"
-import { ModalWarn } from "../../auth/modal/modal-warn"
+const ModalWarn = lazy(() => import("../../auth/modal/modal-warn"))
 import { useGlobalState } from "../../store/useGlobalState"
 
 export default function InvoiceToProduct() {
@@ -109,7 +109,9 @@ export default function InvoiceToProduct() {
 
         </form>
 
-        <ModalWarn active={active} setActive={setActive} error={error} />
+        <Suspense fallback={null}>
+            <ModalWarn active={active} setActive={setActive} error={error} />
+        </Suspense>
     </div>
     )
 }

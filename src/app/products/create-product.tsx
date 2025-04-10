@@ -1,11 +1,13 @@
+import './products.css'
+import '../dashboard/dashboard.css'
 import NavbarDash from "../dashboard/navbar/navbar-dash"
 import { ContainerMain } from "../roles/components/container-main"
 import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { secureFetch } from "../shared/secureFetch"
 import { API_URL } from "../../config/config.brd"
-import { ModalWarn } from "../auth/modal/modal-warn"
-import ShowLoading from "../components/ShowLoading"
+import ModalWarn from "../auth/modal/modal-warn"
+
 
 export default function CreateProduct() {
     const formRef = useRef<any>()
@@ -64,7 +66,7 @@ export default function CreateProduct() {
             <NavbarDash />
             
             <ContainerMain>
-                <div className="dashboard-container">
+                <div className="container-product-create">
                     <div className='user-title'>
                         <img src="/svgs/svg-c-product.svg" alt="Creación de productos" />
                         <p>Puedes editar los productos registrados en el sistema en <Link to="/dashboard/products">Productos.</Link></p>
@@ -97,7 +99,7 @@ export default function CreateProduct() {
 
                     </div>
                 </div>  
-            
+                
                 <ModalWarn setActive={setActive} active={active} error={error}/>
             </ContainerMain>
         </>

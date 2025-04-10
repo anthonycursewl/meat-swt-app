@@ -1,10 +1,12 @@
 import './user-options.css'
 import { useNavigate } from 'react-router-dom';
-import { ModalWarn } from '../../auth/modal/modal-warn';
 import { useState } from 'react';
 import { secureFetch } from '../../shared/secureFetch';
 import { API_URL } from '../../../config/config.brd';
 import { useGlobalState } from '../../store/useGlobalState';
+
+// Cargando los modales de manera lazy
+import ModalWarn from '../../auth/modal/modal-warn';
 import ModalProtectUser from './modal-protect-user';
 
 interface Props {
@@ -79,7 +81,7 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre, user
                 )   
                 : ''}`}>
             
-            <div className='options_modal_content'>
+            <div className={`${active ? 'options_modal_content_active' : 'options_modal_content'}`}>
                 <div className='options_close_x'>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px'}}>
                         <img src="/icons/icon-username.svg" alt="Logo Close" />
@@ -126,6 +128,7 @@ export const ModalOptinsUsers = ({ active, id, permisos, setActive, nombre, user
         </div>
          
         <ModalProtectUser activeProtect={activeProtect} setActiveProtect={setActiveProtect} id={id as string} />
+
         <ModalWarn active={activeDelete} setActive={setActiveDelete} error={`¿Estás seguro que quieres borrar este Usuario?`} dynamicFunction={handleDeleteRole} loading={laoding} zIndex={2}/>
     </>
     )

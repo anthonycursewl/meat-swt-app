@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { secureFetch } from "../shared/secureFetch"
 import { API_URL } from "../../config/config.brd"
-import { ModalWarn } from "../auth/modal/modal-warn"
+import ModalWarn from "../auth/modal/modal-warn"
 import ShowLoading from "../components/ShowLoading"
 
 export default function EditProduct() {
@@ -129,7 +129,7 @@ export default function EditProduct() {
 
                     </div>
                 </div>  
-            
+
                 <ModalWarn setActive={setActive} active={active} error={error}/>
             </ContainerMain>
         </>

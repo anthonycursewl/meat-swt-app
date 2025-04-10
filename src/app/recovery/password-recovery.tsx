@@ -1,8 +1,8 @@
 import './password-recovery.css'
 import { useState } from 'react';
-import { ModalWarn } from '../auth/modal/modal-warn';
+import ModalWarn from '../auth/modal/modal-warn';
 import { sendEmailCode } from './services/send-email-code';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function PasswordRecovery() {
     const [loading, setLoading] = useState(false);

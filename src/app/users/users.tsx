@@ -4,6 +4,7 @@ import { secureFetch } from "../shared/secureFetch"
 import { API_URL } from "../../config/config.brd"
 import { useGlobalState } from "../store/useGlobalState"
 import { Link } from "react-router-dom"
+import '../roles/roles.css'
 
 // Componente para mostrar la ruta actual
 import ShowCurrentPath from "../components/ShowCurrentPath"

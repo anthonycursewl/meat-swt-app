@@ -7,6 +7,8 @@ import { useEffect, useState } from "react"
 import { secureFetch } from "../shared/secureFetch"
 import { ShowDetialsInvoice } from "./components/show-details-invoice"
 import '../products/components/options-product.css'
+import '../users/create-user.css'
+import '../products/products.css'
 import { useGlobalState } from "../store/useGlobalState"
 
 export default function Invoices() {

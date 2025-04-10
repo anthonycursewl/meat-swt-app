@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import './roles-options.css'
 import { useNavigate } from 'react-router-dom';
-import { ModalWarn } from '../../auth/modal/modal-warn';
-import { useState } from 'react';
+import ModalWarn from '../../auth/modal/modal-warn';
 import { secureFetch } from '../../shared/secureFetch';
 import { API_URL } from '../../../config/config.brd';
 import { useGlobalState } from '../../store/useGlobalState';

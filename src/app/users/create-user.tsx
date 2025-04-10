@@ -3,12 +3,13 @@ import NavbarDash from '../dashboard/navbar/navbar-dash'
 import { ContainerMain } from '../roles/components/container-main'
 import ShowCurrentPath from '../components/ShowCurrentPath'
 import { useRef } from 'react'
-import { ModalWarn } from '../auth/modal/modal-warn'
+import ModalWarn from '../auth/modal/modal-warn'
 import { useState } from 'react'
 import { secureFetch } from '../shared/secureFetch'
 import { API_URL } from '../../config/config.brd'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import '../roles/roles.css'
 
 export default function CreateUser() {
     const formRef = useRef<any>()

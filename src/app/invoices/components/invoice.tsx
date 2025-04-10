@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { secureFetch } from "../../shared/secureFetch";
 import { API_URL } from "../../../config/config.brd";
 import { useGlobalState } from "../../store/useGlobalState";
-import { ModalWarn } from "../../auth/modal/modal-warn";
+import ModalWarn from "../../auth/modal/modal-warn";
 
 export default function Invoice() {
   const types = ["compra", "venta"];
@@ -319,7 +319,8 @@ export default function Invoice() {
           )}
         </div>
       </form>
-      <ModalWarn active={active} setActive={setActive} error={errorMessage} />
+
+        <ModalWarn active={active} setActive={setActive} error={errorMessage} />
     </div>
   );
 }

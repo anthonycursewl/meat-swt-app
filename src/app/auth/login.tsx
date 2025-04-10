@@ -2,7 +2,7 @@ import './css/login.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useRef } from 'react'
 import { thrLogin } from './services/thrLogin';
-import { ModalWarn } from './modal/modal-warn';
+import ModalWarn from './modal/modal-warn';
 
 export default function Login() {   
     const [loading, setLoading] = useState(false);

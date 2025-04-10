@@ -2,10 +2,11 @@ import NavbarDash from "../dashboard/navbar/navbar-dash"
 import { ContainerMain } from "./components/container-main"
 import ShowCurrentPath from "../components/ShowCurrentPath"
 import { secureFetch } from "../shared/secureFetch"
-import { API_URL } from "../../config/config.brd"
+import { API_URL } from "../../config/config.brd" 
 import { useEffect, useState, useRef } from "react"
-import { ModalWarn } from "../auth/modal/modal-warn"
+import ModalWarn from "../auth/modal/modal-warn"
 import { useNavigate, useParams } from "react-router-dom"
+import './roles.css'
 
 export default function EditRole() {
   const [permissions, setPermissions] = useState([])
@@ -78,7 +79,7 @@ export default function EditRole() {
 }
 
   const handleRemovePermission = (permissionToRemove: string) => {
-      const updatedPermissions = addedPermissions.filter((permission: string) => permission !== permissionToRemove);
+      const updatedPermissions = addedPermissions?.filter((permission: string) => permission !== permissionToRemove);
       setAddedPermissions(updatedPermissions);
   }
   
@@ -141,7 +142,7 @@ export default function EditRole() {
                   verifyPermissions(e)
                 }}>
                   {
-                    permissions.map((permission: any, index: number) => {
+                    permissions?.map((permission: any, index: number) => {
                       return (
                         <option value={permission} key={index}>{permission}</option>
                       )
@@ -183,7 +184,7 @@ export default function EditRole() {
           </form>
         </div>
       </ContainerMain>
-
+        
       <ModalWarn active={active} setActive={setActive} error={error}/>
     </>
   )

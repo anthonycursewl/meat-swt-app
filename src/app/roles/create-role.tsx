@@ -4,8 +4,9 @@ import ShowCurrentPath from "../components/ShowCurrentPath"
 import { secureFetch } from "../shared/secureFetch"
 import { API_URL } from "../../config/config.brd"
 import { useEffect, useState, useRef } from "react"
-import { ModalWarn } from "../auth/modal/modal-warn"
+import ModalWarn from "../auth/modal/modal-warn"
 import { useNavigate } from "react-router-dom"
+import './roles.css'
 
 export default function CreateRole() {
   const [permissions, setPermissions] = useState([])
@@ -159,8 +160,8 @@ export default function CreateRole() {
           </form>
         </div>
       </ContainerMain>
-
-      <ModalWarn active={active} setActive={setActive} error={error}/>
+      
+        <ModalWarn active={active} setActive={setActive} error={error}/>
     </>
   )
 }

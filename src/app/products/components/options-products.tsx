@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './options-product.css'
-import { ModalWarn } from '../../auth/modal/modal-warn';
 import { useState } from 'react';
+import ModalWarn from '../../auth/modal/modal-warn';
 import { secureFetch } from '../../shared/secureFetch';
 import { API_URL } from '../../../config/config.brd';
 import { useGlobalState } from '../../store/useGlobalState';

@@ -59,7 +59,7 @@
     gap: 1rem;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 940px) {
     .navbar-links {
         display: none;
     }

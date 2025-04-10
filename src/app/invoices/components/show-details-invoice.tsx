@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../../products/components/options-product.css'
-import { ModalWarn } from '../../auth/modal/modal-warn';
 import { useEffect, useState } from 'react';
+import ModalWarn from '../../auth/modal/modal-warn';
 import { secureFetch } from '../../shared/secureFetch';
 import { API_URL } from '../../../config/config.brd';
 import { useGlobalState } from '../../store/useGlobalState';
@@ -40,11 +40,6 @@ export const ShowDetialsInvoice = ({ active, setActive, info }: Props) =>  {
         }
     }
 
-
-    useEffect(() => {
-        console.log(info)
-    }, [])
-
     return (
         <>
             <div className={`modal_p_options ${active ? 'modal_p_options_active' : ''}`}>
@@ -75,19 +70,18 @@ export const ShowDetialsInvoice = ({ active, setActive, info }: Props) =>  {
                             <p>{info.total}</p>
                         </li>
 
-
                         <li>
                             <p>Detalles</p>
                         </li>
                         {
-                            info?.detalles?.map((item: any) => (
-                                <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-                                    <li key={item.id} style={{ flexDirection: 'column', alignItems: 'flex-start', width: '100%'}}>
+                            info?.detalles?.map((item: any, index: number) => (
+                                <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between'}} key={index}>
+                                    <li style={{ flexDirection: 'column', alignItems: 'flex-start', width: '100%'}}>
                                         <p>$ Precio Individual</p>
                                         <p>{item?.precioIndividual}</p>
                                     </li>
 
-                                    <li key={item.id} style={{ flexDirection: 'column', alignItems: 'flex-start', width: '100%'}}>
+                                    <li style={{ flexDirection: 'column', alignItems: 'flex-start', width: '100%'}}>
                                         <p>Cantidad</p>
                                         <p>{item?.cantidad}</p>
                                     </li>
@@ -99,6 +93,11 @@ export const ShowDetialsInvoice = ({ active, setActive, info }: Props) =>  {
                         <li onClick={() => {setActiveWarn(true)}}>
                             <img src="/icons/icon-delete-role.svg" alt="Icon Eliminar Role" />
                             <p>Eliminar</p>
+                        </li>
+
+                        <li onClick={() => {console.log("ola")}}>
+                            <img src="/icons/icon-c-product.svg" alt="Icon Eliminar Role" />
+                            <p>Generar PDF</p>
                         </li>
 
                         <li onClick={() => {setActive(false)}}>

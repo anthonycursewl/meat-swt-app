@@ -8,6 +8,11 @@
     gap: 2rem;
 }
 
+.container-product-create {
+    width: 100%;
+    background: transparent;
+}
+
 .products-cards {
     display: grid;
     align-items: center;
@@ -72,6 +77,11 @@
 }
 
 .products-create a img {
+    width: 20px;
+    height: auto;
+}
+
+.user-title img {
     width: 20px;
     height: auto;
 }

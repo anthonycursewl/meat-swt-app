@@ -89,7 +89,7 @@ export default function SetRole() {
 
   const eliminarRol = async (active: string) => {
 
-    const newUserPermissions = user?.permissions?.filter(role => role.id !== active);
+    const newUserPermissions = user?.permissions?.filter((role: any) => role.id !== active);
     setUser({ ...user, permissions: newUserPermissions });
 
     const stateDeleteRole = await secureFetch(

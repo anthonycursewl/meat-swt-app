@@ -9,7 +9,7 @@ interface Props {
     zIndex?: number;
 }
 
-export const ModalWarn = ({ active, error, setActive, dynamicFunction, loading, zIndex = 1 }: Props) =>  {
+export default function ModalWarn ({ active, error, setActive, dynamicFunction, loading, zIndex = 1 }: Props) {
     
     const handleClose = () => {
         if (setActive) {

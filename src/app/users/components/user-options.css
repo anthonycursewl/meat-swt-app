@@ -24,6 +24,37 @@
     box-shadow: 0 0 10px #bbbbbb8f;
     min-width: 250px;
     cursor: default;
+    transform: translateY(-10px);
+    transition: .2s ease-in-out;
+}
+
+.options_modal_content_active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #faf7f7;
+    border-radius: 1rem;
+    flex-direction: column;
+    box-shadow: 0 0 10px #bbbbbb8f;
+    min-width: 250px;
+    cursor: default;
+    transform: translateY(-25px);
+    transition: .2s ease-in-out;
+    overflow: hidden;
+}
+
+@media (max-width: 700px) {
+    .options_modal {
+        align-items: flex-end;
+    }
+
+    .options_modal_content_active {
+        width: 100%;
+    }
+
+    .options_modal_content {
+        width: 90%;
+    }
 }
 
 .options_modal_active {
